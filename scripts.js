@@ -95,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Display sorted initiative order in card form
         initiativeOrderContainer.innerHTML = "";
+        const rollGroups = {};
+
         initiativeList.forEach((player, index) => {
             const card = document.createElement("div");
             card.classList.add("card");
@@ -110,6 +112,21 @@ document.addEventListener("DOMContentLoaded", function () {
             card.appendChild(rollElement);
 
             initiativeOrderContainer.appendChild(card);
+
+            // Group players with the same roll
+            if (!rollGroups[player.roll]) {
+                rollGroups[player.roll] = [];
+            }
+            rollGroups[player.roll].push(card);
+        });
+
+        // Highlight cards with the same roll
+        Object.values(rollGroups).forEach(group => {
+            if (group.length > 1) {
+                group.forEach(card => {
+                    card.classList.add("highlight");
+                });
+            }
         });
 
         currentTurnIndex = 0;
