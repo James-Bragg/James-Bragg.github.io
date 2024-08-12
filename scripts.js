@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const playerName = playerNameInput.value.trim();
 
             if (playerName) {
+                const playerId = `player-${Date.now()}`; // Unique ID for each player
+
                 // Add player to session list
                 const li = document.createElement("li");
                 li.textContent = playerName;
@@ -43,14 +45,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const label = document.createElement("label");
                 label.textContent = playerName;
-                initiativeEntry.appendChild(label);
+                label.setAttribute("for", playerId); // Associate label with input
 
                 const input = document.createElement("input");
                 input.type = "number";
                 input.min = "1";
                 input.max = "20";
-                initiativeEntry.appendChild(input);
+                input.id = playerId;
+                input.name = `initiative-${playerName}`; // Unique name for each input
 
+                initiativeEntry.appendChild(label);
+                initiativeEntry.appendChild(input);
                 initiativeEntries.appendChild(initiativeEntry);
 
                 playerNameInput.value = ""; // Clear input field
