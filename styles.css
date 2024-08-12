@@ -242,6 +242,7 @@ header .nav-right li a:hover {
 
 .card {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 120px;
@@ -262,15 +263,18 @@ header .nav-right li a:hover {
 
 .card .player-name {
     font-size: 14px;
-    margin-bottom: 8px;
+    margin-bottom: auto; /* Push name to the top */
+    margin-top: 10px; /* Add some space at the top */
+    text-align: center;
 }
 
 .card span {
     font-weight: bold;
-    font-size: var(--font-size-large);
-    margin-top: 8px;
+    font-size: 32px; /* Increase the size of the roll number */
+    margin: auto 0; /* Center the number vertically */
 }
 
+/* Highlight for Current Turn */
 .card.highlight {
     border: 3px solid var(--primary-color);
     background-color: var(--highlight-background);
@@ -285,7 +289,7 @@ header .nav-right li a:hover {
     opacity: 1;
 }
 
-/* Navigation */
+/* Navigation Button Styles */
 .navigation button {
     background-color: var(--primary-color);
     color: white;

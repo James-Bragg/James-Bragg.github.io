@@ -173,10 +173,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Navigate to previous turn
     if (prevTurnBtn) {
         prevTurnBtn.addEventListener("click", function () {
-            if (currentTurnIndex > 0) {
-                currentTurnIndex--;
-                updateCurrentTurn();
+            const cards = initiativeOrderContainer.querySelectorAll(".card");
+            currentTurnIndex--;
+
+            if (currentTurnIndex < 0) {
+                currentTurnIndex = cards.length - 1; // Loop back to the last card
             }
+
+            updateCurrentTurn();
         });
     }
 
@@ -184,10 +188,13 @@ document.addEventListener("DOMContentLoaded", function () {
     if (nextTurnBtn) {
         nextTurnBtn.addEventListener("click", function () {
             const cards = initiativeOrderContainer.querySelectorAll(".card");
-            if (currentTurnIndex < cards.length - 1) {
-                currentTurnIndex++;
-                updateCurrentTurn();
+            currentTurnIndex++;
+
+            if (currentTurnIndex >= cards.length) {
+                currentTurnIndex = 0; // Loop back to the first card
             }
+
+            updateCurrentTurn();
         });
     }
 });
