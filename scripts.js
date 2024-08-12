@@ -154,6 +154,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 initiativeOrderContainer.appendChild(card);
             });
 
+            console.log("Initiative Order Container HTML:", initiativeOrderContainer.innerHTML);
+
             currentTurnIndex = 0;
             updateCurrentTurn();
 
