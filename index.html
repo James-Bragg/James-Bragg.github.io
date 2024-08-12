@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your Dungeons & Dragons initiative order easily with the D&D Initiative Tracker.">
+    <meta name="keywords" content="D&D, Dungeons and Dragons, Initiative Tracker, Tabletop, Role-playing game">
+    <title>D&D Initiative Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header role="banner">
+        <nav role="navigation">
+            <div class="nav-left">
+                <h1>D&D Initiative Tracker</h1>
+            </div>
+            <ul class="nav-right">
+                <li><a href="index.html">Initiative Order</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container" role="main">
+        <section class="left-box saved-players-section" aria-labelledby="saved-players-heading">
+            <h2 id="saved-players-heading">Saved Players</h2>
+            <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
+                <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name">
+                <input type="submit" value="Add Player">
+            </form>
+            <div class="list-box">
+                <ul id="savedPlayersList" aria-live="polite">
+                    <!-- Player list will be handled by JavaScript -->
+                </ul>
+            </div>
+        </section>
+
+        <section class="right-box current-session-players-section" aria-labelledby="current-players-heading">
+            <h2 id="current-players-heading">Current Session Players</h2>
+            <div class="session-controls">
+                <button id="addToSessionBtn" aria-label="Add to Session">Add to Session</button>
+                <button id="clearSessionBtn" aria-label="Clear Session">Clear Session</button>
+                <button id="removeFromSessionBtn" aria-label="Remove Selected Players">Remove Selected</button>
+            </div>
+            <div class="list-box">
+                <ul id="sessionPlayersList" aria-live="polite">
+                    <!-- Session player list will be handled by JavaScript -->
+                </ul>
+            </div>
+        </section>
+
+        <section class="right-box initiative-rolls-section" aria-labelledby="initiative-rolls-heading">
+            <h2 id="initiative-rolls-heading">Initiative Rolls</h2>
+            <form id="initiativeForm" aria-label="Initiative Rolls Form">
+                <ul id="initiativeEntries" aria-live="polite">
+                    <!-- Initiative entries will be handled by JavaScript -->
+                </ul>
+                <button type="submit" class="start-round-btn" aria-label="Start Round">Start Round</button>
+            </form>
+        </section>
+
+        <section class="right-box initiative-order-section" aria-labelledby="initiative-order-heading">
+            <h2 id="initiative-order-heading">Initiative Order</h2>
+            <div id="initiativeOrder" class="card-container">
+                <!-- Initiative order will be handled by JavaScript -->
+            </div>
+            <div class="navigation">
+                <button id="prevTurnBtn" aria-label="Previous Turn">Previous Turn</button>
+                <button id="nextTurnBtn" aria-label="Next Turn">Next Turn</button>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2024 D&D Initiative Tracker. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

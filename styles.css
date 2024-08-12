@@ -1,0 +1,404 @@
+/* CSS Variables */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --background-color: #121212;
+    --foreground-color: #ffffff;
+    --dark-background: #1f1f1f;
+    --medium-background: #2c2c2c;
+    --light-background: #333;
+    --highlight-background: #444;
+    --font-size-default: 16px;
+    --font-size-large: 28px;
+    --border-radius: 5px;
+    --box-shadow-default: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    --box-shadow-hover: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Base Styles for Buttons */
+button, input[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size-default);
+    box-shadow: var(--box-shadow-default);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow-hover);
+}
+
+/* Base Styles for Input Boxes */
+input[type="text"], input[type="number"] {
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: var(--border-radius);
+    background-color: var(--medium-background);
+    color: var(--foreground-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: var(--font-size-default);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Header and Navigation */
+header {
+    background-color: var(--dark-background);
+    color: white;
+    box-shadow: var(--box-shadow-default);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 2px solid #333;
+    height: 60px;
+}
+
+header .nav-left {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+header .nav-left h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header .nav-right {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header .nav-right li {
+    margin-left: 20px;
+}
+
+header .nav-right li a {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-size: var(--font-size-default);
+    font-weight: bold;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header .nav-right li a:hover {
+    background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow-hover);
+}
+
+/* Main Container and Sections */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 100px 20px 20px;
+    flex: 1;
+    gap: 20px;
+}
+
+.left-box, .right-box {
+    background-color: var(--dark-background);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    width: 48%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.saved-players-section,
+.current-session-players-section,
+.initiative-rolls-section,
+.initiative-order-section {
+    background-color: var(--medium-background);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    flex: 1;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Forms and Input Fields */
+.add-player-form,
+.session-form,
+#initiativeForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* Adjusted Button Styles */
+.start-round-btn,
+.add-session-btn,
+.remove-session-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+/* Lists */
+.list-box {
+    flex: 1;
+    background-color: var(--light-background);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
+    max-height: calc(100% - 120px);
+}
+
+.list-box ul,
+#sessionPlayersList,
+#initiativeEntries {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 100%;
+    text-align: left;
+}
+
+.list-box ul li,
+#sessionPlayersList li,
+.initiative-entry label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: var(--foreground-color);
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--highlight-background);
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.list-box ul li.selected,
+#sessionPlayersList li.selected,
+.initiative-entry.selected label {
+    background-color: var(--primary-color);
+    color: var(--foreground-color);
+}
+
+.list-box ul li:hover:not(.selected),
+#sessionPlayersList li:hover:not(.selected),
+.initiative-entry:hover:not(.selected) label {
+    background-color: #555;
+    color: var(--primary-color);
+}
+
+/* Cards */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card-container.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card {
+    background-color: var(--light-background);
+    color: white;
+    width: 120px;
+    height: 140px;
+    margin: 8px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-default);
+    text-align: center;
+    padding: 8px;
+    position: relative;
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background-color: #555;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.card .player-name {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.card span {
+    font-weight: bold;
+    font-size: var(--font-size-large);
+    margin-top: 8px;
+}
+
+.card.highlight {
+    border: 3px solid var(--primary-color);
+    background-color: var(--highlight-background);
+    box-shadow: 0px 0px 15px rgba(52, 152, 219, 0.8);
+}
+
+/* Navigation */
+.navigation button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size-default);
+    box-shadow: var(--box-shadow-default);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 8px;
+    display: none; /* Initially hidden */
+}
+
+.navigation button:hover {
+    background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow-hover);
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-background);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: auto;
+    font-size: 0.9em;
+}
+
+/* About Page Styling */
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 100px 20px 20px;
+}
+
+.about-box {
+    background-color: var(--medium-background);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.about-box h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: var(--foreground-color);
+}
+
+.about-box p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Initiative Rolls Section */
+.initiative-rolls-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items at the top */
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    background-color: var(--medium-background);
+}
+
+#initiativeEntries {
+    width: 100%;
+    margin-top: 0; /* Remove any default margin at the top */
+    padding: 0;
+    list-style-type: none;
+}
+
+.initiative-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: var(--highlight-background);
+    border-radius: var(--border-radius);
+}
+
+.initiative-entry label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: var(--foreground-color);
+}
+
+.initiative-entry input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border-radius: var(--border-radius);
+    border: 1px solid #555;
+    background-color: var(--light-background);
+    color: var(--foreground-color);
+}
+
+.initiative-entry input[type="number"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+}
