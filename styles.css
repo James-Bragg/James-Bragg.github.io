@@ -403,7 +403,6 @@ footer {
     box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
-
 .player-item.selected {
     background-color: var(--primary-color);
     color: white;
@@ -412,4 +411,66 @@ footer {
 .card.highlight {
     border: 3px solid var(--primary-color);
     background-color: var(--highlight-background);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        padding: 80px 20px 20px;
+    }
+
+    .left-box, .right-box {
+        width: 100%;
+    }
+    
+    .navigation button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    .card {
+        width: 100px;
+        height: 120px;
+    }
+    
+    .card .player-name {
+        font-size: 12px;
+    }
+    
+    .card span {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 60px 10px 10px;
+    }
+    
+    .card {
+        width: 80px;
+        height: 100px;
+    }
+    
+    .card .player-name {
+        font-size: 10px;
+    }
+    
+    .card span {
+        font-size: 20px;
+    }
+    
+    .about-box {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .about-box h2 {
+        font-size: 24px;
+    }
+    
+    .about-box p {
+        font-size: 16px;
+    }
 }

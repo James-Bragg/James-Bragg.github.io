@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manage your Dungeons & Dragons initiative order easily with the D&D Initiative Tracker.">
+    <meta name="description" content="Manage your Dungeons & Dragons initiative order and other game aspects easily with the D&D Tool Assister.">
     <meta name="keywords" content="D&D, Dungeons and Dragons, Initiative Tracker, Tabletop, Role-playing game">
-    <title>D&D Initiative Tracker</title>
+    <title>D&D Tool Assister</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,7 +14,7 @@
     <header role="banner">
         <nav role="navigation">
             <div class="nav-left">
-                <h1>D&D Initiative Tracker</h1>
+                <h1>D&D Tool Assister</h1>
             </div>
             <ul class="nav-right">
                 <li><a href="index.html">Initiative Order</a></li>
@@ -27,8 +27,8 @@
         <section class="left-box session-players-section" aria-labelledby="session-players-heading">
             <h2 id="session-players-heading">Session Players</h2>
             <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
-                <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name">
-                <input type="submit" value="Add Player">
+                <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name" title="Enter the name of the player to add them to the session">
+                <input type="submit" value="Add Player" title="Click to add the player to the session">
             </form>
             <div class="list-box">
                 <ul id="sessionPlayersList" aria-live="polite">
@@ -36,8 +36,8 @@
                 </ul>
             </div>
             <div class="session-controls">
-                <button id="clearSessionBtn" aria-label="Clear Session">Clear Session</button>
-                <button id="removeFromSessionBtn" aria-label="Remove Selected Players">Remove Selected</button>
+                <button id="clearSessionBtn" aria-label="Clear Session" title="Clear all players and initiative rolls from the session">Clear Session</button>
+                <button id="removeFromSessionBtn" aria-label="Remove Selected Players" title="Remove selected players from the session">Remove Selected</button>
             </div>
         </section>
 
@@ -64,7 +64,7 @@
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2024 D&D Initiative Tracker. All rights reserved.</p>
+        <p>&copy; 2024 D&D Tool Assister. All rights reserved.</p>
     </footer>
 
     <script src="scripts.js"></script>

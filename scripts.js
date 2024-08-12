@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Element references
     const addPlayerForm = document.getElementById("addPlayerForm");
     const sessionPlayersList = document.getElementById("sessionPlayersList");
     const clearSessionBtn = document.getElementById("clearSessionBtn");
@@ -11,12 +12,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentTurnIndex = -1;
 
+    // Function to update the current turn highlight
+    function updateCurrentTurn() {
+        const cards = initiativeOrderContainer.querySelectorAll(".card");
+        cards.forEach((card, index) => {
+            card.classList.remove("highlight");
+            if (index === currentTurnIndex) {
+                card.classList.add("highlight");
+            }
+        });
+    }
+
     // Add player to session and initiative rolls
     addPlayerForm.addEventListener("submit", function (event) {
         event.preventDefault();
         const playerNameInput = addPlayerForm.querySelector('input[name="name"]');
         const playerName = playerNameInput.value.trim();
-        
+
         if (playerName !== "") {
             // Add player to session list
             const li = document.createElement("li");
@@ -44,22 +56,30 @@ document.addEventListener("DOMContentLoaded", function () {
             initiativeEntries.appendChild(initiativeEntry);
 
             playerNameInput.value = ""; // Clear input field
+        } else {
+            alert("Player name cannot be empty. Please enter a valid name.");
         }
     });
 
     // Clear all players from session and initiative rolls
     clearSessionBtn.addEventListener("click", function () {
-        sessionPlayersList.innerHTML = "";
-        initiativeEntries.innerHTML = "";
-        initiativeOrderContainer.innerHTML = "";
-        prevTurnBtn.style.display = "none";
-        nextTurnBtn.style.display = "none";
-        currentTurnIndex = -1;
+        if (confirm("Are you sure you want to clear the session? This action cannot be undone.")) {
+            sessionPlayersList.innerHTML = "";
+            initiativeEntries.innerHTML = "";
+            initiativeOrderContainer.innerHTML = "";
+            prevTurnBtn.style.display = "none";
+            nextTurnBtn.style.display = "none";
+            currentTurnIndex = -1;
+        }
     });
 
     // Remove selected players from session and initiative rolls
     removeFromSessionBtn.addEventListener("click", function () {
         const selectedItems = sessionPlayersList.querySelectorAll(".selected");
+        if (selectedItems.length === 0) {
+            alert("No players selected. Please select players to remove.");
+            return;
+        }
         selectedItems.forEach(item => {
             const playerName = item.textContent;
             sessionPlayersList.removeChild(item);
@@ -90,16 +110,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        if (initiativeList.length === 0) {
+            alert("No valid initiative rolls entered. Please enter initiative rolls before starting the round.");
+            console.error("No initiative rolls to display.");
+            return;
+        }
+
         // Sort by initiative rolls (descending order)
         initiativeList.sort((a, b) => b.roll - a.roll);
 
         // Clear any existing cards in the initiative order section
         initiativeOrderContainer.innerHTML = "";
-
-        if (initiativeList.length === 0) {
-            console.error("No initiative rolls to display.");
-            return;
-        }
 
         // Display sorted initiative order in card form
         const rollGroups = {};
@@ -144,17 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
         prevTurnBtn.style.display = "inline-block";
         nextTurnBtn.style.display = "inline-block";
     });
-
-    // Update the current turn highlight
-    function updateCurrentTurn() {
-        const cards = initiativeOrderContainer.querySelectorAll(".card");
-        cards.forEach((card, index) => {
-            card.classList.remove("highlight");
-            if (index === currentTurnIndex) {
-                card.classList.add("highlight");
-            }
-        });
-    }
 
     // Navigate to previous turn
     prevTurnBtn.addEventListener("click", function () {
