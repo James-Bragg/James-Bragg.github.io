@@ -24,30 +24,20 @@
     </header>
 
     <main class="main-container" role="main">
-        <section class="left-box saved-players-section" aria-labelledby="saved-players-heading">
-            <h2 id="saved-players-heading">Saved Players</h2>
+        <section class="left-box session-players-section" aria-labelledby="session-players-heading">
+            <h2 id="session-players-heading">Session Players</h2>
             <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
                 <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name">
                 <input type="submit" value="Add Player">
             </form>
             <div class="list-box">
-                <ul id="savedPlayersList" aria-live="polite">
-                    <!-- Player list will be handled by JavaScript -->
-                </ul>
-            </div>
-        </section>
-
-        <section class="right-box current-session-players-section" aria-labelledby="current-players-heading">
-            <h2 id="current-players-heading">Current Session Players</h2>
-            <div class="session-controls">
-                <button id="addToSessionBtn" aria-label="Add to Session">Add to Session</button>
-                <button id="clearSessionBtn" aria-label="Clear Session">Clear Session</button>
-                <button id="removeFromSessionBtn" aria-label="Remove Selected Players">Remove Selected</button>
-            </div>
-            <div class="list-box">
                 <ul id="sessionPlayersList" aria-live="polite">
                     <!-- Session player list will be handled by JavaScript -->
                 </ul>
+            </div>
+            <div class="session-controls">
+                <button id="clearSessionBtn" aria-label="Clear Session">Clear Session</button>
+                <button id="removeFromSessionBtn" aria-label="Remove Selected Players">Remove Selected</button>
             </div>
         </section>
 

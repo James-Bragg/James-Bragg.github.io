@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const savedPlayersList = document.getElementById('savedPlayersList');
     const sessionPlayersList = document.getElementById('sessionPlayersList');
     const initiativeEntries = document.getElementById('initiativeEntries');
     const addPlayerForm = document.getElementById('addPlayerForm');
-    const addToSessionBtn = document.getElementById('addToSessionBtn');
     const clearSessionBtn = document.getElementById('clearSessionBtn');
     const removeFromSessionBtn = document.getElementById('removeFromSessionBtn');
     const startRoundBtn = document.querySelector('.start-round-btn');
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         errorContainer.appendChild(dismissButton);
     }
 
-    // Helper function to check if a player is in a list
+    // Helper function to check if a player is in the session list
     function isPlayerInList(playerName, list) {
         return [...list.children].some(player => player.dataset.name === playerName);
     }
@@ -57,40 +55,24 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to deselect all players
     function deselectAllPlayers() {
         selectedPlayers.clear();
-        [...savedPlayersList.children, ...sessionPlayersList.children].forEach(playerElement => {
+        [...sessionPlayersList.children].forEach(playerElement => {
             playerElement.classList.remove('selected');
         });
     }
 
-    // Load saved players from localStorage
-    function loadSavedPlayers() {
-        const savedPlayers = JSON.parse(localStorage.getItem('savedPlayers')) || [];
-        savedPlayers.forEach(playerName => {
-            addPlayer(playerName);
-        });
-    }
-
-    // Save player to localStorage
-    function savePlayer(playerName) {
-        const savedPlayers = JSON.parse(localStorage.getItem('savedPlayers')) || [];
-        if (!savedPlayers.includes(playerName)) {
-            savedPlayers.push(playerName);
-            localStorage.setItem('savedPlayers', JSON.stringify(savedPlayers));
-        }
-    }
-
-    // Function to add a new player to the saved list
-    function addPlayer(playerName) {
-        if (!isPlayerInList(playerName, savedPlayersList)) {
+    // Function to add a new player to the session list
+    function addPlayerToSession(playerName) {
+        if (!isPlayerInList(playerName, sessionPlayersList)) {
             const newPlayer = document.createElement('li');
             newPlayer.classList.add('player');
             newPlayer.dataset.name = playerName;
             newPlayer.textContent = playerName;
-            savedPlayersList.appendChild(newPlayer);
-            savePlayer(playerName); // Save the player to localStorage
+            newPlayer.addEventListener('click', togglePlayerSelection);
+            sessionPlayersList.appendChild(newPlayer);
             addPlayerForm.reset();
+            updateInitiativeEntries(); // Update initiative entries after adding a new player
         } else {
-            displayError(`Player "${playerName}" already exists in the saved list.`);
+            displayError(`Player "${playerName}" already exists in the session.`);
         }
     }
 
@@ -99,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         const playerName = addPlayerForm.name.value.trim();
         if (playerName) {
-            addPlayer(playerName);
+            addPlayerToSession(playerName);
         }
     });
 
@@ -119,32 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         initiativeEntries.appendChild(fragment);
     }
-
-    // Add selected players to the session and update initiative entries
-    function addPlayersToSession() {
-        let anyPlayerAdded = false;
-        selectedPlayers.forEach(player => {
-            if (!isPlayerInList(player, sessionPlayersList)) {
-                const playerElement = [...savedPlayersList.children].find(el => el.dataset.name === player);
-                if (playerElement) {
-                    sessionPlayersList.appendChild(playerElement.cloneNode(true));
-                    playerElement.classList.remove('selected');
-                    anyPlayerAdded = true;
-                }
-            } else {
-                displayError(`Player "${player}" is already in the session.`);
-            }
-        });
-
-        if (anyPlayerAdded) {
-            updateInitiativeEntries();
-        }
-
-        // Deselect all players after adding to session
-        deselectAllPlayers();
-    }
-
-    addToSessionBtn.addEventListener('click', addPlayersToSession);
 
     // Clear session players and update initiative entries
     clearSessionBtn.addEventListener('click', function () {
@@ -268,9 +224,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         displayPlayerCards();
     });
-
-    // Load saved players on page load
-    loadSavedPlayers();
 
     // Initial update of initiative rolls based on current session players
     updateInitiativeEntries();
