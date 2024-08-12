@@ -28,6 +28,25 @@ document.addEventListener("DOMContentLoaded", function () {
         return existingPlayers.includes(playerName.toLowerCase());
     }
 
+    // Function to update the visibility of the buttons
+    function updateButtonVisibility() {
+        // Hide or show the start round button based on the number of initiative entries
+        if (initiativeEntries.children.length === 0) {
+            startRoundBtn.style.display = "none";
+        } else {
+            startRoundBtn.style.display = "inline-block";
+        }
+
+        // Hide or show the prev/next buttons based on the number of initiative groups
+        if (initiativeGroups.length > 1) {
+            prevTurnBtn.style.display = "inline-block";
+            nextTurnBtn.style.display = "inline-block";
+        } else {
+            prevTurnBtn.style.display = "none";
+            nextTurnBtn.style.display = "none";
+        }
+    }
+
     // Add player to session and initiative rolls
     if (addPlayerForm) {
         addPlayerForm.addEventListener("submit", function (event) {
@@ -77,6 +96,9 @@ document.addEventListener("DOMContentLoaded", function () {
             initiativeEntries.appendChild(initiativeEntry);
 
             playerNameInput.value = ""; // Clear input field
+
+            // Update button visibility
+            updateButtonVisibility();
         });
     }
 
@@ -87,10 +109,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 sessionPlayersList.innerHTML = "";
                 initiativeEntries.innerHTML = "";
                 initiativeOrderContainer.innerHTML = "";
-                prevTurnBtn.style.display = "none";
-                nextTurnBtn.style.display = "none";
                 currentTurnIndex = 0;
                 initiativeGroups = [];
+
+                // Update button visibility
+                updateButtonVisibility();
             }
         });
     }
@@ -115,6 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     initiativeEntries.removeChild(initiativeEntry);
                 }
             });
+
+            // Update button visibility
+            updateButtonVisibility();
         });
     }
 
@@ -185,14 +211,8 @@ document.addEventListener("DOMContentLoaded", function () {
             currentTurnIndex = 0;
             updateCurrentTurn();
 
-            // Show navigation buttons
-            if (initiativeGroups.length > 1) {
-                prevTurnBtn.style.display = "inline-block";
-                nextTurnBtn.style.display = "inline-block";
-            } else {
-                prevTurnBtn.style.display = "none";
-                nextTurnBtn.style.display = "none";
-            }
+            // Update button visibility
+            updateButtonVisibility();
         });
     }
 
@@ -221,4 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
             updateCurrentTurn();
         });
     }
+
+    // Initial check to hide buttons if necessary
+    updateButtonVisibility();
 });
