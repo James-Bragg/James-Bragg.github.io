@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 input.max = "20";
                 input.id = playerId;
                 input.name = `initiative-${playerName}`; // Unique name for each input
+                input.autocomplete = "off"; // Disable autocomplete for initiative rolls
 
                 initiativeEntry.appendChild(label);
                 initiativeEntry.appendChild(input);
