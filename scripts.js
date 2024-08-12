@@ -93,8 +93,15 @@ document.addEventListener("DOMContentLoaded", function () {
         // Sort by initiative rolls (descending order)
         initiativeList.sort((a, b) => b.roll - a.roll);
 
-        // Display sorted initiative order in card form
+        // Clear any existing cards in the initiative order section
         initiativeOrderContainer.innerHTML = "";
+
+        if (initiativeList.length === 0) {
+            console.error("No initiative rolls to display.");
+            return;
+        }
+
+        // Display sorted initiative order in card form
         const rollGroups = {};
 
         initiativeList.forEach((player, index) => {
@@ -111,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
             rollElement.textContent = player.roll;
             card.appendChild(rollElement);
 
+            // Append the card to the initiative order container
             initiativeOrderContainer.appendChild(card);
 
             // Group players with the same roll
