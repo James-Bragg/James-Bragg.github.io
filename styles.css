@@ -220,15 +220,13 @@ header .nav-right li a:hover {
 }
 
 .list-box ul li.selected,
-#sessionPlayersList li.selected,
-.initiative-entry.selected label {
+#sessionPlayersList li.selected {
     background-color: var(--primary-color);
-    color: var(--foreground-color);
+    color: white;
 }
 
 .list-box ul li:hover:not(.selected),
-#sessionPlayersList li:hover:not(.selected),
-.initiative-entry:hover:not(.selected) label {
+#sessionPlayersList li:hover:not(.selected) {
     background-color: #555;
     color: var(--primary-color);
 }
@@ -401,16 +399,6 @@ footer {
 .initiative-entry input[type="number"]:focus {
     border-color: var(--primary-color);
     box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
-}
-
-.player-item.selected {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.card.highlight {
-    border: 3px solid var(--primary-color);
-    background-color: var(--highlight-background);
 }
 
 /* Responsive Design */

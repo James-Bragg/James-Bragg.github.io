@@ -13,12 +13,11 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-    <header role="banner">
-        <nav role="navigation">
+    <header>
+        <nav>
             <div class="nav-left">
                 <h1>D&D Tool Assister</h1>
             </div>
@@ -29,7 +28,7 @@
         </nav>
     </header>
 
-    <main class="main-container" role="main">
+    <main class="main-container">
         <section class="left-box session-players-section" aria-labelledby="session-players-heading">
             <h2 id="session-players-heading">Session Players</h2>
             <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
@@ -69,11 +68,11 @@
         </section>
     </main>
 
-    <footer role="contentinfo">
+    <footer>
         <p>&copy; 2024 D&D Tool Assister. All rights reserved.</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script src="scripts.js" defer></script>
 </body>
 
 </html>
