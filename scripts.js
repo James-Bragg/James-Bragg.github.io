@@ -11,13 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentTurnIndex = -1;
 
-    // Add player to session
+    // Add player to session and initiative rolls
     addPlayerForm.addEventListener("submit", function (event) {
         event.preventDefault();
         const playerNameInput = addPlayerForm.querySelector('input[name="name"]');
         const playerName = playerNameInput.value.trim();
         
         if (playerName !== "") {
+            // Add player to session list
             const li = document.createElement("li");
             li.textContent = playerName;
             li.classList.add("player-item");
@@ -25,38 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 li.classList.toggle("selected");
             });
             sessionPlayersList.appendChild(li);
-            playerNameInput.value = ""; // Clear input field
-        }
-    });
 
-    // Clear all players from session
-    clearSessionBtn.addEventListener("click", function () {
-        sessionPlayersList.innerHTML = "";
-        initiativeEntries.innerHTML = "";
-        initiativeOrderContainer.innerHTML = "";
-        prevTurnBtn.style.display = "none";
-        nextTurnBtn.style.display = "none";
-        currentTurnIndex = -1;
-    });
-
-    // Remove selected players from session
-    removeFromSessionBtn.addEventListener("click", function () {
-        const selectedItems = sessionPlayersList.querySelectorAll(".selected");
-        selectedItems.forEach(item => {
-            sessionPlayersList.removeChild(item);
-        });
-    });
-
-    // Add initiative rolls for each player in the session list
-    function addInitiativeRolls() {
-        initiativeEntries.innerHTML = ""; // Clear previous entries
-        const players = sessionPlayersList.querySelectorAll("li");
-        players.forEach(player => {
+            // Add player to initiative rolls
             const initiativeEntry = document.createElement("li");
             initiativeEntry.classList.add("initiative-entry");
 
             const label = document.createElement("label");
-            label.textContent = player.textContent;
+            label.textContent = playerName;
             initiativeEntry.appendChild(label);
 
             const input = document.createElement("input");
@@ -66,8 +42,37 @@ document.addEventListener("DOMContentLoaded", function () {
             initiativeEntry.appendChild(input);
 
             initiativeEntries.appendChild(initiativeEntry);
+
+            playerNameInput.value = ""; // Clear input field
+        }
+    });
+
+    // Clear all players from session and initiative rolls
+    clearSessionBtn.addEventListener("click", function () {
+        sessionPlayersList.innerHTML = "";
+        initiativeEntries.innerHTML = "";
+        initiativeOrderContainer.innerHTML = "";
+        prevTurnBtn.style.display = "none";
+        nextTurnBtn.style.display = "none";
+        currentTurnIndex = -1;
+    });
+
+    // Remove selected players from session and initiative rolls
+    removeFromSessionBtn.addEventListener("click", function () {
+        const selectedItems = sessionPlayersList.querySelectorAll(".selected");
+        selectedItems.forEach(item => {
+            const playerName = item.textContent;
+            sessionPlayersList.removeChild(item);
+
+            // Remove corresponding initiative roll entry
+            const initiativeEntry = Array.from(initiativeEntries.children).find(entry => {
+                return entry.querySelector("label").textContent === playerName;
+            });
+            if (initiativeEntry) {
+                initiativeEntries.removeChild(initiativeEntry);
+            }
         });
-    }
+    });
 
     // Handle start round: sort and display initiative order
     startRoundBtn.addEventListener("click", function (event) {
@@ -142,8 +147,4 @@ document.addEventListener("DOMContentLoaded", function () {
             updateCurrentTurn();
         }
     });
-
-    // Initialize the script by adding initiative rolls when players are added
-    sessionPlayersList.addEventListener("DOMNodeInserted", addInitiativeRolls);
-    sessionPlayersList.addEventListener("DOMNodeRemoved", addInitiativeRolls);
 });
