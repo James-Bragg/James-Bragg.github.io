@@ -245,13 +245,13 @@ header .nav-right li a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 120px;
-    height: 140px;
+    width: 90px;
+    height: 110px;
     background-color: #2c3e50; /* Background color for visibility */
     color: white;
-    margin: 8px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    margin: 5px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -262,23 +262,23 @@ header .nav-right li a:hover {
 }
 
 .card .player-name {
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: auto; /* Push name to the top */
-    margin-top: 10px; /* Add some space at the top */
+    margin-top: 5px; /* Add some space at the top */
     text-align: center;
 }
 
 .card span {
     font-weight: bold;
-    font-size: 32px; /* Increase the size of the roll number */
+    font-size: 24px; /* Adjust the size of the roll number */
     margin: auto 0; /* Center the number vertically */
 }
 
 /* Highlight for Current Turn */
 .card.highlight {
-    border: 3px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     background-color: var(--highlight-background);
-    box-shadow: 0px 0px 15px rgba(52, 152, 219, 0.8);
+    box-shadow: 0px 0px 10px rgba(52, 152, 219, 0.8);
 }
 
 /* Initiative Order Container */
@@ -287,26 +287,6 @@ header .nav-right li a:hover {
     flex-wrap: wrap;
     justify-content: center;
     opacity: 1;
-}
-
-/* Navigation Button Styles */
-.navigation button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: var(--font-size-default);
-    box-shadow: var(--box-shadow-default);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    margin: 0 8px;
-    display: none; /* Initially hidden */
-}
-
-.navigation button:hover {
-    background-color: var(--secondary-color);
-    box-shadow: var(--box-shadow-hover);
 }
 
 /* Footer */
@@ -416,25 +396,6 @@ footer {
     }
     
     .card {
-        width: 100px;
-        height: 120px;
-    }
-    
-    .card .player-name {
-        font-size: 12px;
-    }
-    
-    .card span {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-container {
-        padding: 60px 10px 10px;
-    }
-    
-    .card {
         width: 80px;
         height: 100px;
     }
@@ -445,6 +406,25 @@ footer {
     
     .card span {
         font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 60px 10px 10px;
+    }
+    
+    .card {
+        width: 70px;
+        height: 90px;
+    }
+    
+    .card .player-name {
+        font-size: 8px;
+    }
+    
+    .card span {
+        font-size: 18px;
     }
     
     .about-box {

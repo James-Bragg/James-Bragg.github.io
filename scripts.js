@@ -22,6 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Function to check for duplicate player names
+    function isDuplicateName(playerName) {
+        const existingPlayers = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent.toLowerCase());
+        return existingPlayers.includes(playerName.toLowerCase());
+    }
+
     // Add player to session and initiative rolls
     if (addPlayerForm) {
         addPlayerForm.addEventListener("submit", function (event) {
@@ -29,42 +35,48 @@ document.addEventListener("DOMContentLoaded", function () {
             const playerNameInput = addPlayerForm.querySelector('input[name="name"]');
             const playerName = playerNameInput.value.trim();
 
-            if (playerName) {
-                const playerId = `player-${Date.now()}`; // Unique ID for each player
-
-                // Add player to session list
-                const li = document.createElement("li");
-                li.textContent = playerName;
-                li.classList.add("player-item");
-                li.addEventListener("click", function () {
-                    li.classList.toggle("selected");
-                });
-                sessionPlayersList.appendChild(li);
-
-                // Add player to initiative rolls
-                const initiativeEntry = document.createElement("li");
-                initiativeEntry.classList.add("initiative-entry");
-
-                const label = document.createElement("label");
-                label.textContent = playerName;
-                label.setAttribute("for", playerId); // Associate label with input
-
-                const input = document.createElement("input");
-                input.type = "number";
-                input.min = "1";
-                input.max = "20";
-                input.id = playerId;
-                input.name = `initiative-${playerName}`; // Unique name for each input
-                input.autocomplete = "off"; // Disable autocomplete for initiative rolls
-
-                initiativeEntry.appendChild(label);
-                initiativeEntry.appendChild(input);
-                initiativeEntries.appendChild(initiativeEntry);
-
-                playerNameInput.value = ""; // Clear input field
-            } else {
+            if (!playerName) {
                 alert("Player name cannot be empty. Please enter a valid name.");
+                return;
             }
+
+            if (isDuplicateName(playerName)) {
+                alert("Player name already exists. Please enter a different name.");
+                return;
+            }
+
+            const playerId = `player-${Date.now()}`; // Unique ID for each player
+
+            // Add player to session list
+            const li = document.createElement("li");
+            li.textContent = playerName;
+            li.classList.add("player-item");
+            li.addEventListener("click", function () {
+                li.classList.toggle("selected");
+            });
+            sessionPlayersList.appendChild(li);
+
+            // Add player to initiative rolls
+            const initiativeEntry = document.createElement("li");
+            initiativeEntry.classList.add("initiative-entry");
+
+            const label = document.createElement("label");
+            label.textContent = playerName;
+            label.setAttribute("for", playerId); // Associate label with input
+
+            const input = document.createElement("input");
+            input.type = "number";
+            input.min = "1";
+            input.max = "20";
+            input.id = playerId;
+            input.name = `initiative-${playerName}`; // Unique name for each input
+            input.autocomplete = "off"; // Disable autocomplete for initiative rolls
+
+            initiativeEntry.appendChild(label);
+            initiativeEntry.appendChild(input);
+            initiativeEntries.appendChild(initiativeEntry);
+
+            playerNameInput.value = ""; // Clear input field
         });
     }
 
