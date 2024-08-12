@@ -120,6 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            console.log("Initiative List:", initiativeList);
+
             // Sort by initiative rolls (descending order)
             initiativeList.sort((a, b) => b.roll - a.roll);
 
@@ -128,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Display sorted initiative order in card form
             initiativeList.forEach((player, index) => {
+                console.log("Creating card for player:", player.name, "with roll:", player.roll);
                 const card = document.createElement("div");
                 card.classList.add("card");
                 card.dataset.index = index;
