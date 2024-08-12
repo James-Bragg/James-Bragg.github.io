@@ -10,13 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevTurnBtn = document.getElementById("prevTurnBtn");
     const nextTurnBtn = document.getElementById("nextTurnBtn");
 
-    let currentTurnIndex = -1;
+    let currentTurnIndex = 0;
+    let initiativeGroups = [];
 
     // Function to update the current turn highlight
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
-        cards.forEach((card, index) => {
-            card.classList.toggle("highlight", index === currentTurnIndex);
+        cards.forEach(card => {
+            const groupIndex = parseInt(card.dataset.groupIndex, 10);
+            card.classList.toggle("highlight", groupIndex === currentTurnIndex);
         });
     }
 
@@ -75,7 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 initiativeOrderContainer.innerHTML = "";
                 prevTurnBtn.style.display = "none";
                 nextTurnBtn.style.display = "none";
-                currentTurnIndex = -1;
+                currentTurnIndex = 0;
+                initiativeGroups = [];
             }
         });
     }
@@ -126,41 +129,52 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            console.log("Initiative List:", initiativeList);
-
-            // Sort by initiative rolls (descending order)
+            // Sort by initiative rolls (descending order) and group by roll value
             initiativeList.sort((a, b) => b.roll - a.roll);
+
+            initiativeGroups = [];
+            let currentGroup = [];
+            let currentRoll = initiativeList[0].roll;
+
+            initiativeList.forEach((player, index) => {
+                if (player.roll !== currentRoll) {
+                    initiativeGroups.push(currentGroup);
+                    currentGroup = [];
+                    currentRoll = player.roll;
+                }
+                currentGroup.push(player);
+            });
+            initiativeGroups.push(currentGroup); // Push the last group
 
             // Clear any existing cards in the initiative order section
             initiativeOrderContainer.innerHTML = "";
 
             // Display sorted initiative order in card form
-            initiativeList.forEach((player, index) => {
-                console.log("Creating card for player:", player.name, "with roll:", player.roll);
-                const card = document.createElement("div");
-                card.classList.add("card");
-                card.dataset.index = index;
+            initiativeGroups.forEach((group, groupIndex) => {
+                group.forEach(player => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+                    card.dataset.groupIndex = groupIndex;
 
-                const nameElement = document.createElement("div");
-                nameElement.classList.add("player-name");
-                nameElement.textContent = player.name;
-                card.appendChild(nameElement);
+                    const nameElement = document.createElement("div");
+                    nameElement.classList.add("player-name");
+                    nameElement.textContent = player.name;
+                    card.appendChild(nameElement);
 
-                const rollElement = document.createElement("span");
-                rollElement.textContent = player.roll;
-                card.appendChild(rollElement);
+                    const rollElement = document.createElement("span");
+                    rollElement.textContent = player.roll;
+                    card.appendChild(rollElement);
 
-                // Append the card to the initiative order container
-                initiativeOrderContainer.appendChild(card);
+                    // Append the card to the initiative order container
+                    initiativeOrderContainer.appendChild(card);
+                });
             });
-
-            console.log("Initiative Order Container HTML:", initiativeOrderContainer.innerHTML);
 
             currentTurnIndex = 0;
             updateCurrentTurn();
 
             // Show navigation buttons
-            if (initiativeList.length > 1) {
+            if (initiativeGroups.length > 1) {
                 prevTurnBtn.style.display = "inline-block";
                 nextTurnBtn.style.display = "inline-block";
             } else {
@@ -173,11 +187,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Navigate to previous turn
     if (prevTurnBtn) {
         prevTurnBtn.addEventListener("click", function () {
-            const cards = initiativeOrderContainer.querySelectorAll(".card");
             currentTurnIndex--;
 
             if (currentTurnIndex < 0) {
-                currentTurnIndex = cards.length - 1; // Loop back to the last card
+                currentTurnIndex = initiativeGroups.length - 1; // Loop back to the last group
             }
 
             updateCurrentTurn();
@@ -187,11 +200,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Navigate to next turn
     if (nextTurnBtn) {
         nextTurnBtn.addEventListener("click", function () {
-            const cards = initiativeOrderContainer.querySelectorAll(".card");
             currentTurnIndex++;
 
-            if (currentTurnIndex >= cards.length) {
-                currentTurnIndex = 0; // Loop back to the first card
+            if (currentTurnIndex >= initiativeGroups.length) {
+                currentTurnIndex = 0; // Loop back to the first group
             }
 
             updateCurrentTurn();
