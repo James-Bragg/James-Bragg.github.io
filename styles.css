@@ -90,7 +90,6 @@ header .nav-left h1 {
 
 header .nav-right {
     display: flex;
-    flex-wrap: wrap;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -156,23 +155,23 @@ header .nav-right li a:hover {
 
 /* Mobile Menu */
 .nav-right {
-    display: none; /* Start hidden */
-    flex-direction: column;
-    transition: max-height 0.3s ease;
-    max-height: 0;
+    transition: max-height 0.3s ease, visibility 0.3s ease;
     overflow: hidden;
     background-color: var(--dark-background); /* Ensure menu background is consistent */
-    width: 100%; /* Make the menu take up full width */
-    position: absolute; /* Position the menu absolutely to not be constrained by nav bar height */
-    top: 60px; /* Position below the nav bar */
+    width: 100%;
+    position: absolute;
+    top: 60px;
     left: 0;
     z-index: 1000;
+    flex-direction: column;
+    visibility: hidden; /* Start hidden */
+    max-height: 0; /* Start collapsed */
 }
 
 .nav-right.active {
-    display: flex;
-    max-height: 300px; /* Show the menu when active */
-    padding: 10px 0; /* Add some padding for spacing */
+    max-height: 300px; /* Expand to show items */
+    visibility: visible; /* Make visible */
+    padding: 10px 0;
 }
 
 header .nav-right li {
@@ -181,20 +180,37 @@ header .nav-right li {
 }
 
 header .nav-right li a {
-    display: block; /* Ensure full clickable area */
+    display: block;
     padding: 15px 20px;
     text-align: center;
-    width: 100%; /* Make links fill the available width */
-    color: white; /* Ensure text color is readable */
+    width: 100%;
+    color: white;
 }
 
+/* Desktop and Tablet View */
+@media (min-width: 769px) {
+    .nav-right {
+        display: flex; /* Flex on larger screens */
+        position: static;
+        visibility: visible;
+        max-height: none;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .nav-toggle {
+        display: none; /* Hide toggle button on larger screens */
+    }
+}
+
+/* Mobile View */
 @media (max-width: 768px) {
     .nav-toggle {
         display: flex;
     }
 
-    header .nav-right {
-        display: none;
+    .nav-right {
+        display: none; /* Hide initially */
     }
 
     .nav-right.active {
@@ -552,6 +568,21 @@ footer {
     box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
+@media (min-width: 769px) {
+    .nav-right {
+        display: flex; /* Flex on larger screens */
+        position: static;
+        visibility: visible;
+        max-height: none;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .nav-toggle {
+        display: none; /* Hide toggle button on larger screens */
+    }
+}
+
 @media (max-width: 768px) {
     header nav {
         flex-direction: column;
@@ -568,10 +599,6 @@ footer {
 
     .nav-toggle {
         display: flex;
-    }
-
-    .nav-right {
-        display: none;
     }
 
     .nav-right.active {
