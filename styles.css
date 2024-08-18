@@ -93,6 +93,8 @@ header .nav-right {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    justify-content: flex-end;
+    flex-grow: 1;
 }
 
 header .nav-right li {
@@ -195,6 +197,7 @@ header .nav-right li a {
         visibility: visible;
         max-height: none;
         flex-direction: row;
+        justify-content: flex-end;
         padding: 0;
     }
 
@@ -207,10 +210,6 @@ header .nav-right li a {
 @media (max-width: 768px) {
     .nav-toggle {
         display: flex;
-    }
-
-    .nav-right {
-        display: none; /* Hide initially */
     }
 
     .nav-right.active {
@@ -575,6 +574,7 @@ footer {
         visibility: visible;
         max-height: none;
         flex-direction: row;
+        justify-content: flex-end;
         padding: 0;
     }
 
