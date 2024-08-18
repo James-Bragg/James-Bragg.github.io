@@ -35,7 +35,6 @@ button, input[type="submit"] {
     font-size: var(--font-size-default);
     box-shadow: var(--box-shadow-default);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    width: auto;
     white-space: nowrap;
 }
 
@@ -94,11 +93,14 @@ header .nav-right {
     margin: 0;
     padding: 0;
     justify-content: flex-end;
-    flex-grow: 1;
+    gap: 10px; /* Add space between buttons */
+    flex-wrap: wrap; /* Allow wrapping if needed */
 }
 
 header .nav-right li {
-    margin-left: 20px;
+    flex: 1 1 auto; /* Allow items to grow and shrink as needed */
+    display: flex;
+    justify-content: center;
 }
 
 header .nav-right li a {
@@ -113,6 +115,8 @@ header .nav-right li a {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap;
+    width: 100%;
+    text-align: center;
 }
 
 header .nav-right li a:hover {
@@ -576,6 +580,8 @@ footer {
         flex-direction: row;
         justify-content: flex-end;
         padding: 0;
+        gap: 10px; /* Maintain gap between buttons */
+        flex-wrap: nowrap; /* Ensure items don't wrap */
     }
 
     .nav-toggle {
