@@ -80,6 +80,7 @@ header nav {
 
 header .nav-left {
     flex-shrink: 0;
+    margin-right: 20px; /* Add space between title and buttons */
 }
 
 header .nav-left h1 {
@@ -203,6 +204,8 @@ header .nav-right li a {
         flex-direction: row;
         justify-content: flex-end;
         padding: 0;
+        gap: 10px; /* Maintain gap between buttons */
+        flex-wrap: nowrap; /* Ensure items don't wrap */
     }
 
     .nav-toggle {
