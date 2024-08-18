@@ -1,4 +1,3 @@
-/* CSS Variables */
 :root {
     --primary-color: #3498db;
     --secondary-color: #2980b9;
@@ -15,7 +14,6 @@
     --box-shadow-hover: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* General Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--background-color);
@@ -27,7 +25,6 @@ body {
     min-height: 100vh;
 }
 
-/* Base Styles for Buttons */
 button, input[type="submit"] {
     background-color: var(--primary-color);
     color: white;
@@ -38,6 +35,8 @@ button, input[type="submit"] {
     font-size: var(--font-size-default);
     box-shadow: var(--box-shadow-default);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: auto;
+    white-space: nowrap; /* Prevents text from wrapping in buttons */
 }
 
 button:hover, input[type="submit"]:hover {
@@ -45,7 +44,6 @@ button:hover, input[type="submit"]:hover {
     box-shadow: var(--box-shadow-hover);
 }
 
-/* Base Styles for Input Boxes */
 input[type="text"], input[type="number"] {
     padding: 10px;
     border: 1px solid #555;
@@ -63,7 +61,6 @@ input[type="text"]:focus, input[type="number"]:focus {
     box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
-/* Header and Navigation */
 header {
     background-color: var(--dark-background);
     color: white;
@@ -88,8 +85,7 @@ header .nav-left {
 
 header .nav-left h1 {
     margin: 0;
-    font-size: 24px;
-    font-size: calc(16px + 1.2vw); /* Responsive font size */
+    font-size: calc(16px + 1.2vw);
 }
 
 header .nav-right {
@@ -111,10 +107,11 @@ header .nav-right li a {
     padding: 10px 20px;
     border-radius: var(--border-radius);
     text-decoration: none;
-    font-size: calc(12px + 0.8vw); /* Responsive font size */
+    font-size: var(--font-size-default);
     font-weight: bold;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
 }
 
 header .nav-right li a:hover {
@@ -165,7 +162,7 @@ header .nav-right li a:hover {
 }
 
 .nav-right.active {
-    max-height: 300px; /* Adjust depending on the number of links */
+    max-height: 300px;
     flex-direction: column;
 }
 
@@ -198,7 +195,7 @@ header .nav-right li {
     }
 
     .nav-right.active {
-        max-height: 500px; /* Adjust as needed for content */
+        max-height: 500px;
     }
 
     .nav-right li {
@@ -213,7 +210,6 @@ header .nav-right li {
     }
 }
 
-/* Main Container for Home Page */
 .home-container {
     display: flex;
     justify-content: center;
@@ -268,7 +264,6 @@ header .nav-right li {
     box-shadow: var(--box-shadow-hover);
 }
 
-/* Resources Page Styling */
 .resources-container {
     display: flex;
     justify-content: center;
@@ -290,7 +285,7 @@ header .nav-right li {
 .resources-box h2 {
     margin-bottom: 20px;
     font-size: 28px;
-    color: var (--foreground-color);
+    color: var(--foreground-color);
 }
 
 .resources-box p {
@@ -320,7 +315,6 @@ header .nav-right li {
     color: var(--secondary-color);
 }
 
-/* Main Container and Sections */
 .main-container {
     display: flex;
     justify-content: space-between;
@@ -358,7 +352,6 @@ header .nav-right li {
     justify-content: space-between;
 }
 
-/* Forms and Input Fields */
 .add-player-form,
 .session-form,
 #initiativeForm {
@@ -368,7 +361,6 @@ header .nav-right li {
     margin-bottom: 10px;
 }
 
-/* Adjusted Button Styles */
 .start-round-btn,
 .add-session-btn,
 .remove-session-btn {
@@ -377,7 +369,6 @@ header .nav-right li {
     right: 15px;
 }
 
-/* Lists */
 .list-box {
     flex: 1;
     background-color: var(--light-background);
@@ -427,7 +418,6 @@ header .nav-right li {
     color: var(--primary-color);
 }
 
-/* Cards */
 .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -443,7 +433,7 @@ header .nav-right li {
     align-items: center;
     width: 90px;
     height: 110px;
-    background-color: #2c3e50; /* Background color for visibility */
+    background-color: #2c3e50;
     color: white;
     margin: 5px;
     border-radius: 6px;
@@ -459,25 +449,23 @@ header .nav-right li {
 
 .card .player-name {
     font-size: 12px;
-    margin-bottom: auto; /* Push name to the top */
-    margin-top: 5px; /* Add some space at the top */
+    margin-bottom: auto;
+    margin-top: 5px;
     text-align: center;
 }
 
 .card span {
     font-weight: bold;
-    font-size: 24px; /* Adjust the size of the roll number */
-    margin: auto 0; /* Center the number vertically */
+    font-size: 24px;
+    margin: auto 0;
 }
 
-/* Highlight for Current Turn */
 .card.highlight {
     border: 2px solid var(--primary-color);
     background-color: var(--highlight-background);
     box-shadow: 0px 0px 10px rgba(52, 152, 219, 0.8);
 }
 
-/* Initiative Order Container */
 #initiativeOrder {
     display: flex;
     flex-wrap: wrap;
@@ -485,7 +473,6 @@ header .nav-right li {
     opacity: 1;
 }
 
-/* Footer */
 footer {
     background-color: var(--dark-background);
     color: white;
@@ -495,7 +482,6 @@ footer {
     font-size: 0.9em;
 }
 
-/* About Page Styling */
 .about-container {
     display: flex;
     justify-content: center;
@@ -526,11 +512,10 @@ footer {
     line-height: 1.6;
 }
 
-/* Initiative Rolls Section */
 .initiative-rolls-section {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align items at the top */
+    justify-content: flex-start;
     align-items: center;
     padding: 15px;
     border-radius: 8px;
@@ -540,7 +525,7 @@ footer {
 
 #initiativeEntries {
     width: 100%;
-    margin-top: 0; /* Remove any default margin at the top */
+    margin-top: 0;
     padding: 0;
     list-style-type: none;
 }
@@ -575,7 +560,6 @@ footer {
     box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     header nav {
         flex-direction: column;
@@ -600,7 +584,7 @@ footer {
     }
 
     .nav-right.active {
-        max-height: 500px; /* Adjust as needed for content */
+        max-height: 500px;
     }
 
     .nav-right li {
