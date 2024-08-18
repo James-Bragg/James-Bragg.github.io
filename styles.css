@@ -156,15 +156,23 @@ header .nav-right li a:hover {
 
 /* Mobile Menu */
 .nav-right {
+    display: none; /* Start hidden */
+    flex-direction: column;
     transition: max-height 0.3s ease;
-    max-height: 60px;
+    max-height: 0;
     overflow: hidden;
-    flex-direction: row;
+    background-color: var(--dark-background); /* Ensure menu background is consistent */
+    width: 100%; /* Make the menu take up full width */
+    position: absolute; /* Position the menu absolutely to not be constrained by nav bar height */
+    top: 60px; /* Position below the nav bar */
+    left: 0;
+    z-index: 1000;
 }
 
 .nav-right.active {
-    max-height: 300px;
-    flex-direction: column;
+    display: flex;
+    max-height: 300px; /* Show the menu when active */
+    padding: 10px 0; /* Add some padding for spacing */
 }
 
 header .nav-right li {
@@ -172,42 +180,25 @@ header .nav-right li {
     text-align: center;
 }
 
+header .nav-right li a {
+    display: block; /* Ensure full clickable area */
+    padding: 15px 20px;
+    text-align: center;
+    width: 100%; /* Make links fill the available width */
+    color: white; /* Ensure text color is readable */
+}
+
 @media (max-width: 768px) {
-    header nav {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
-    }
-
-    .nav-left {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
     .nav-toggle {
         display: flex;
     }
 
-    .nav-right {
-        width: 100%;
-        max-height: 0;
+    header .nav-right {
+        display: none;
     }
 
     .nav-right.active {
-        max-height: 500px;
-    }
-
-    .nav-right li {
-        width: 100%;
-        margin: 0;
-    }
-
-    header .nav-right li a {
-        width: 100%;
-        padding: 15px 20px;
-        text-align: center;
+        display: flex;
     }
 }
 
@@ -580,23 +571,11 @@ footer {
     }
 
     .nav-right {
-        width: 100%;
-        max-height: 0;
+        display: none;
     }
 
     .nav-right.active {
-        max-height: 500px;
-    }
-
-    .nav-right li {
-        width: 100%;
-        margin: 0;
-    }
-
-    header .nav-right li a {
-        width: 100%;
-        padding: 15px 20px;
-        text-align: center;
+        display: flex;
     }
 
     .main-container {
