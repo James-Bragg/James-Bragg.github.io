@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Mobile menu toggle button and menu reference
+    const navToggle = document.querySelector(".nav-toggle");
+    const navRight = document.querySelector(".nav-right");
+
+    // Toggle the mobile menu open and close
+    navToggle.addEventListener("click", function () {
+        navRight.classList.toggle("active");
+        navToggle.classList.toggle("active");
+    });
+
+    // Existing code for managing D&D Tool Assister functionalities
+
     // Element references
     const addPlayerForm = document.getElementById("addPlayerForm");
     const sessionPlayersList = document.getElementById("sessionPlayersList");
@@ -13,17 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentTurnIndex = 0;
     let initiativeGroups = [];
 
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        const navToggle = document.querySelector(".nav-toggle");
-        const navRight = document.querySelector(".nav-right");
-    
-        navToggle.addEventListener("click", function () {
-            navRight.classList.toggle("active");
-            navToggle.classList.toggle("active");
-        });
-    });
-    
     // Function to update the current turn highlight
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
@@ -256,4 +257,3 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial check to hide buttons if necessary
     updateButtonVisibility();
 });
-
