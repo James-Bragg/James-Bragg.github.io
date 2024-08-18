@@ -13,6 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentTurnIndex = 0;
     let initiativeGroups = [];
 
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const navToggle = document.querySelector(".nav-toggle");
+        const navRight = document.querySelector(".nav-right");
+    
+        navToggle.addEventListener("click", function () {
+            navRight.classList.toggle("active");
+            navToggle.classList.toggle("active");
+        });
+    });
+    
     // Function to update the current turn highlight
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
@@ -245,3 +256,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial check to hide buttons if necessary
     updateButtonVisibility();
 });
+

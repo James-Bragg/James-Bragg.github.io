@@ -76,27 +76,25 @@ header {
 
 header nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    border-bottom: 2px solid #333;
     height: 60px;
 }
 
 header .nav-left {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    flex-shrink: 0;
 }
 
 header .nav-left h1 {
     margin: 0;
     font-size: 24px;
+    font-size: calc(16px + 1.2vw); /* Responsive font size */
 }
 
 header .nav-right {
     display: flex;
+    flex-wrap: wrap;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -113,7 +111,7 @@ header .nav-right li a {
     padding: 10px 20px;
     border-radius: var(--border-radius);
     text-decoration: none;
-    font-size: var(--font-size-default);
+    font-size: calc(12px + 0.8vw); /* Responsive font size */
     font-weight: bold;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -122,6 +120,97 @@ header .nav-right li a {
 header .nav-right li a:hover {
     background-color: var(--secondary-color);
     box-shadow: var(--box-shadow-hover);
+}
+
+/* Mobile Menu Toggle */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    position: relative;
+}
+
+.nav-toggle span {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile Menu */
+.nav-right {
+    transition: max-height 0.3s ease;
+    max-height: 60px;
+    overflow: hidden;
+    flex-direction: row;
+}
+
+.nav-right.active {
+    max-height: 300px; /* Adjust depending on the number of links */
+    flex-direction: column;
+}
+
+header .nav-right li {
+    margin: 10px 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .nav-left {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-right {
+        width: 100%;
+        max-height: 0;
+    }
+
+    .nav-right.active {
+        max-height: 500px; /* Adjust as needed for content */
+    }
+
+    .nav-right li {
+        width: 100%;
+        margin: 0;
+    }
+
+    header .nav-right li a {
+        width: 100%;
+        padding: 15px 20px;
+        text-align: center;
+    }
 }
 
 /* Main Container for Home Page */
@@ -201,7 +290,7 @@ header .nav-right li a:hover {
 .resources-box h2 {
     margin-bottom: 20px;
     font-size: 28px;
-    color: var(--foreground-color);
+    color: var (--foreground-color);
 }
 
 .resources-box p {
@@ -478,7 +567,7 @@ footer {
     border-radius: var(--border-radius);
     border: 1px solid #555;
     background-color: var(--light-background);
-    color: var (--foreground-color);
+    color: var(--foreground-color);
 }
 
 .initiative-entry input[type="number"]:focus {
@@ -488,6 +577,43 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .nav-left {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-right {
+        width: 100%;
+        max-height: 0;
+    }
+
+    .nav-right.active {
+        max-height: 500px; /* Adjust as needed for content */
+    }
+
+    .nav-right li {
+        width: 100%;
+        margin: 0;
+    }
+
+    header .nav-right li a {
+        width: 100%;
+        padding: 15px 20px;
+        text-align: center;
+    }
+
     .main-container {
         flex-direction: column;
         padding: 80px 20px 20px;
