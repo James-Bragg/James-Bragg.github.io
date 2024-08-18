@@ -124,6 +124,113 @@ header .nav-right li a:hover {
     box-shadow: var(--box-shadow-hover);
 }
 
+/* Main Container for Home Page */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 100px 20px 20px;
+}
+
+.home-welcome-box {
+    background-color: var(--medium-background);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.home-welcome-box h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: var(--foreground-color);
+}
+
+.home-welcome-box p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cta-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-size: var(--font-size-default);
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow-hover);
+}
+
+/* Resources Page Styling */
+.resources-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 100px 20px 20px;
+}
+
+.resources-box {
+    background-color: var(--medium-background);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    color: #e0e0e0;
+}
+
+.resources-box h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: var(--foreground-color);
+}
+
+.resources-box p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.resources-box ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.resources-box ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.resources-box ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.resources-box ul li a:hover {
+    color: var(--secondary-color);
+}
+
 /* Main Container and Sections */
 .main-container {
     display: flex;
@@ -371,7 +478,7 @@ footer {
     border-radius: var(--border-radius);
     border: 1px solid #555;
     background-color: var(--light-background);
-    color: var(--foreground-color);
+    color: var (--foreground-color);
 }
 
 .initiative-entry input[type="number"]:focus {
@@ -389,21 +496,33 @@ footer {
     .left-box, .right-box {
         width: 100%;
     }
+
+    .home-welcome-box, .resources-box {
+        width: 90%;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
     
+    .cta-button {
+        margin-bottom: 10px;
+    }
+
     .navigation button {
         padding: 8px 16px;
         font-size: 14px;
     }
-    
+
     .card {
         width: 80px;
         height: 100px;
     }
-    
+
     .card .player-name {
         font-size: 10px;
     }
-    
+
     .card span {
         font-size: 20px;
     }
@@ -413,29 +532,37 @@ footer {
     .main-container {
         padding: 60px 10px 10px;
     }
-    
+
+    .left-box, .right-box {
+        width: 100%;
+    }
+
+    .home-welcome-box, .resources-box {
+        width: 100%;
+    }
+
     .card {
         width: 70px;
         height: 90px;
     }
-    
+
     .card .player-name {
         font-size: 8px;
     }
-    
+
     .card span {
         font-size: 18px;
     }
-    
+
     .about-box {
         width: 90%;
         padding: 20px;
     }
-    
+
     .about-box h2 {
         font-size: 24px;
     }
-    
+
     .about-box p {
         font-size: 16px;
     }
