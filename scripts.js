@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
             entries.forEach(entry => {
                 const playerName = entry.querySelector("label").textContent;
                 const rollValue = parseInt(entry.querySelector("input").value, 10);
-                if (!isNaN(rollValue) && rollValue >= 1 && rollValue <= 20) {
+                if (!isNaN(rollValue) && rollValue >= 1 && rollValue <= 60) {
                     initiativeList.push({ name: playerName, roll: rollValue });
                 }
             });
