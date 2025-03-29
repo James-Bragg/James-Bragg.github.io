@@ -1,15 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Mobile menu toggle button and menu reference
     const navToggle = document.querySelector(".nav-toggle");
     const navRight = document.querySelector(".nav-right");
 
-    // Toggle the mobile menu open and close
     navToggle.addEventListener("click", function () {
         navRight.classList.toggle("active");
         navToggle.classList.toggle("active");
     });
 
-    // Element references
     const addPlayerForm = document.getElementById("addPlayerForm");
     const sessionPlayersList = document.getElementById("sessionPlayersList");
     const clearSessionBtn = document.getElementById("clearSessionBtn");
@@ -23,15 +20,31 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentTurnIndex = 0;
     let initiativeGroups = [];
 
-    // === Add Default Players ===
     const defaultPlayerNames = ["Enemy", "Friend", "Emma", "Damian", "Dom", "Ryan", "David", "World", "James"];
 
-    function addPlayerByName(playerName) {
+    function saveToLocalStorage() {
+        const players = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent);
+        const bonuses = {};
+        initiativeEntries.querySelectorAll(".initiative-entry").forEach(entry => {
+            const name = entry.querySelector("label").textContent;
+            const bonus = entry.querySelector("input.bonus").value || "0";
+            bonuses[name] = bonus;
+        });
+        localStorage.setItem("players", JSON.stringify(players));
+        localStorage.setItem("bonuses", JSON.stringify(bonuses));
+    }
+
+    function loadFromLocalStorage() {
+        const players = JSON.parse(localStorage.getItem("players")) || [];
+        const bonuses = JSON.parse(localStorage.getItem("bonuses")) || {};
+        players.forEach(name => addPlayerByName(name, bonuses[name]));
+    }
+
+    function addPlayerByName(playerName, bonus = "") {
         if (isDuplicateName(playerName)) return;
 
         const playerId = `player-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
-        // Add to session list
         const li = document.createElement("li");
         li.textContent = playerName;
         li.classList.add("player-item");
@@ -40,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         sessionPlayersList.appendChild(li);
 
-        // Add to initiative entries
         const initiativeEntry = document.createElement("li");
         initiativeEntry.classList.add("initiative-entry");
 
@@ -56,14 +68,20 @@ document.addEventListener("DOMContentLoaded", function () {
         input.name = `initiative-${playerName}`;
         input.autocomplete = "off";
 
+        const bonusInput = document.createElement("input");
+        bonusInput.type = "number";
+        bonusInput.classList.add("bonus");
+        bonusInput.placeholder = "+bonus";
+        bonusInput.value = bonus;
+        bonusInput.style.width = "60px";
+
         initiativeEntry.appendChild(label);
         initiativeEntry.appendChild(input);
+        initiativeEntry.appendChild(bonusInput);
         initiativeEntries.appendChild(initiativeEntry);
-    }
 
-    defaultPlayerNames.forEach(addPlayerByName);
-    updateButtonVisibility();
-    // === End Default Players ===
+        saveToLocalStorage();
+    }
 
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
@@ -124,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 initiativeOrderContainer.innerHTML = "";
                 currentTurnIndex = 0;
                 initiativeGroups = [];
+                localStorage.clear();
                 updateButtonVisibility();
             }
         });
@@ -146,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     initiativeEntries.removeChild(initiativeEntry);
                 }
             });
+            saveToLocalStorage();
             updateButtonVisibility();
         });
     }
@@ -159,9 +179,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             entries.forEach(entry => {
                 const playerName = entry.querySelector("label").textContent;
-                const rollValue = parseInt(entry.querySelector("input").value, 10);
-                if (!isNaN(rollValue) && rollValue >= 1 && rollValue <= 60) {
-                    initiativeList.push({ name: playerName, roll: rollValue });
+                const rollValue = parseInt(entry.querySelector("input[type='number']").value, 10);
+                const bonusValue = parseInt(entry.querySelector("input.bonus").value, 10) || 0;
+                const total = (isNaN(rollValue) ? 0 : rollValue) + bonusValue;
+                if (!isNaN(total) && total >= 1) {
+                    initiativeList.push({ name: playerName, roll: total });
                 }
             });
 
@@ -177,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let currentGroup = [];
             let currentRoll = initiativeList[0].roll;
 
-            initiativeList.forEach((player, index) => {
+            initiativeList.forEach((player) => {
                 if (player.roll !== currentRoll) {
                     initiativeGroups.push(currentGroup);
                     currentGroup = [];
@@ -235,4 +257,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     updateButtonVisibility();
+    loadFromLocalStorage();
 });
