@@ -194,6 +194,7 @@ header .nav-right li a {
     color: white;
 }
 
+
 /* Desktop and Tablet View */
 @media (min-width: 769px) {
     .nav-right {
@@ -381,6 +382,21 @@ header .nav-right li a {
     position: absolute;
     bottom: 15px;
     right: 15px;
+}
+
+.initiative-entry input.bonus {
+    width: 60px;
+    padding: 5px;
+    border-radius: var(--border-radius);
+    border: 1px solid #555;
+    background-color: var(--light-background);
+    color: var(--foreground-color);
+    margin-left: 10px;
+}
+
+.initiative-entry input.bonus:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
 .list-box {
