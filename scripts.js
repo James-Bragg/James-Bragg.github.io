@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
         navToggle.classList.toggle("active");
     });
 
-    // Existing code for managing D&D Tool Assister functionalities
-
     // Element references
     const addPlayerForm = document.getElementById("addPlayerForm");
     const sessionPlayersList = document.getElementById("sessionPlayersList");
@@ -25,7 +23,48 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentTurnIndex = 0;
     let initiativeGroups = [];
 
-    // Function to update the current turn highlight
+    // === Add Default Players ===
+    const defaultPlayerNames = ["Enemy", "Friend", "Emma", "Damian", "Dom", "Ryan", "David", "World", "James"];
+
+    function addPlayerByName(playerName) {
+        if (isDuplicateName(playerName)) return;
+
+        const playerId = `player-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+
+        // Add to session list
+        const li = document.createElement("li");
+        li.textContent = playerName;
+        li.classList.add("player-item");
+        li.addEventListener("click", function () {
+            li.classList.toggle("selected");
+        });
+        sessionPlayersList.appendChild(li);
+
+        // Add to initiative entries
+        const initiativeEntry = document.createElement("li");
+        initiativeEntry.classList.add("initiative-entry");
+
+        const label = document.createElement("label");
+        label.textContent = playerName;
+        label.setAttribute("for", playerId);
+
+        const input = document.createElement("input");
+        input.type = "number";
+        input.min = "1";
+        input.max = "60";
+        input.id = playerId;
+        input.name = `initiative-${playerName}`;
+        input.autocomplete = "off";
+
+        initiativeEntry.appendChild(label);
+        initiativeEntry.appendChild(input);
+        initiativeEntries.appendChild(initiativeEntry);
+    }
+
+    defaultPlayerNames.forEach(addPlayerByName);
+    updateButtonVisibility();
+    // === End Default Players ===
+
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
         cards.forEach(card => {
@@ -34,22 +73,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Function to check for duplicate player names
     function isDuplicateName(playerName) {
         const existingPlayers = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent.toLowerCase());
         return existingPlayers.includes(playerName.toLowerCase());
     }
 
-    // Function to update the visibility of the buttons
     function updateButtonVisibility() {
-        // Hide or show the start round button based on the number of initiative entries
         if (initiativeEntries.children.length === 0) {
             startRoundBtn.style.display = "none";
         } else {
             startRoundBtn.style.display = "inline-block";
         }
 
-        // Hide or show the prev/next buttons based on the number of initiative groups
         if (initiativeGroups.length > 1) {
             prevTurnBtn.style.display = "inline-block";
             nextTurnBtn.style.display = "inline-block";
@@ -59,7 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Add player to session and initiative rolls
     if (addPlayerForm) {
         addPlayerForm.addEventListener("submit", function (event) {
             event.preventDefault();
@@ -76,45 +110,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            const playerId = `player-${Date.now()}`; // Unique ID for each player
-
-            // Add player to session list
-            const li = document.createElement("li");
-            li.textContent = playerName;
-            li.classList.add("player-item");
-            li.addEventListener("click", function () {
-                li.classList.toggle("selected");
-            });
-            sessionPlayersList.appendChild(li);
-
-            // Add player to initiative rolls
-            const initiativeEntry = document.createElement("li");
-            initiativeEntry.classList.add("initiative-entry");
-
-            const label = document.createElement("label");
-            label.textContent = playerName;
-            label.setAttribute("for", playerId); // Associate label with input
-
-            const input = document.createElement("input");
-            input.type = "number";
-            input.min = "1";
-            input.max = "60";
-            input.id = playerId;
-            input.name = `initiative-${playerName}`; // Unique name for each input
-            input.autocomplete = "off"; // Disable autocomplete for initiative rolls
-
-            initiativeEntry.appendChild(label);
-            initiativeEntry.appendChild(input);
-            initiativeEntries.appendChild(initiativeEntry);
-
-            playerNameInput.value = ""; // Clear input field
-
-            // Update button visibility
+            addPlayerByName(playerName);
+            playerNameInput.value = "";
             updateButtonVisibility();
         });
     }
 
-    // Clear all players from session and initiative rolls
     if (clearSessionBtn) {
         clearSessionBtn.addEventListener("click", function () {
             if (confirm("Are you sure you want to clear the session? This action cannot be undone.")) {
@@ -123,14 +124,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 initiativeOrderContainer.innerHTML = "";
                 currentTurnIndex = 0;
                 initiativeGroups = [];
-
-                // Update button visibility
                 updateButtonVisibility();
             }
         });
     }
 
-    // Remove selected players from session and initiative rolls
     if (removeFromSessionBtn) {
         removeFromSessionBtn.addEventListener("click", function () {
             const selectedItems = sessionPlayersList.querySelectorAll(".selected");
@@ -141,8 +139,6 @@ document.addEventListener("DOMContentLoaded", function () {
             selectedItems.forEach(item => {
                 const playerName = item.textContent;
                 sessionPlayersList.removeChild(item);
-
-                // Remove corresponding initiative roll entry
                 const initiativeEntry = Array.from(initiativeEntries.children).find(entry => {
                     return entry.querySelector("label").textContent === playerName;
                 });
@@ -150,18 +146,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     initiativeEntries.removeChild(initiativeEntry);
                 }
             });
-
-            // Update button visibility
             updateButtonVisibility();
         });
     }
 
-    // Handle start round: sort and display initiative order
     if (startRoundBtn) {
         startRoundBtn.addEventListener("click", function (event) {
             event.preventDefault();
 
-            // Gather initiative rolls and players
             const initiativeList = [];
             const entries = initiativeEntries.querySelectorAll(".initiative-entry");
 
@@ -179,7 +171,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // Sort by initiative rolls (descending order) and group by roll value
             initiativeList.sort((a, b) => b.roll - a.roll);
 
             initiativeGroups = [];
@@ -194,12 +185,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 currentGroup.push(player);
             });
-            initiativeGroups.push(currentGroup); // Push the last group
+            initiativeGroups.push(currentGroup);
 
-            // Clear any existing cards in the initiative order section
             initiativeOrderContainer.innerHTML = "";
 
-            // Display sorted initiative order in card form
             initiativeGroups.forEach((group, groupIndex) => {
                 group.forEach(player => {
                     const card = document.createElement("div");
@@ -215,45 +204,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     rollElement.textContent = player.roll;
                     card.appendChild(rollElement);
 
-                    // Append the card to the initiative order container
                     initiativeOrderContainer.appendChild(card);
                 });
             });
 
             currentTurnIndex = 0;
             updateCurrentTurn();
-
-            // Update button visibility
             updateButtonVisibility();
         });
     }
 
-    // Navigate to previous turn
     if (prevTurnBtn) {
         prevTurnBtn.addEventListener("click", function () {
             currentTurnIndex--;
-
             if (currentTurnIndex < 0) {
-                currentTurnIndex = initiativeGroups.length - 1; // Loop back to the last group
+                currentTurnIndex = initiativeGroups.length - 1;
             }
-
             updateCurrentTurn();
         });
     }
 
-    // Navigate to next turn
     if (nextTurnBtn) {
         nextTurnBtn.addEventListener("click", function () {
             currentTurnIndex++;
-
             if (currentTurnIndex >= initiativeGroups.length) {
-                currentTurnIndex = 0; // Loop back to the first group
+                currentTurnIndex = 0;
             }
-
             updateCurrentTurn();
         });
     }
 
-    // Initial check to hide buttons if necessary
     updateButtonVisibility();
 });
