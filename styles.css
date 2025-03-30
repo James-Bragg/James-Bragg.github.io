@@ -329,7 +329,7 @@ header .nav-right li a {
 
 .main-container {
     display: flex;
-    flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: stretch;
     padding: 100px 20px 20px;
@@ -349,9 +349,9 @@ header .nav-right li a {
     justify-content: space-between;
 }
 
+/* Section styles for saved players, current session, and initiative order */
 .saved-players-section,
 .current-session-players-section,
-.initiative-rolls-section,
 .initiative-order-section {
     background-color: var(--medium-background);
     padding: 15px;
@@ -363,6 +363,27 @@ header .nav-right li a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+/* Updated Initiative Rolls Section */
+.initiative-rolls-section {
+    background: linear-gradient(135deg, var(--medium-background), var(--dark-background));
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.initiative-rolls-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
 }
 
 .add-player-form,
@@ -382,8 +403,8 @@ header .nav-right li a {
 }
 
 .initiative-entry input.bonus {
-    width: 100%;      /* Changed to be responsive */
-    max-width: 60px;  /* Ensures it doesn’t become too wide */
+    width: 100%;
+    max-width: 60px;
     padding: 5px;
     border-radius: var(--border-radius);
     border: 1px solid #555;
