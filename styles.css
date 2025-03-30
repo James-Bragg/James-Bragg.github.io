@@ -76,7 +76,7 @@ nav {
     background: none;
     border: none;
     cursor: pointer;
-    display: none; /* Hidden on desktop, will be enabled in mobile view */
+    display: none; /* Hidden on desktop, visible on mobile */
 }
 
 .nav-toggle span {
@@ -108,7 +108,7 @@ nav {
     color: #bb86fc;
 }
 
-/* Mobile view adjustments */
+/* Dropdown menu styling for small screens */
 @media (max-width: 768px) {
     .nav-toggle {
          display: block;
@@ -293,6 +293,12 @@ main {
 
 .initiative-entry input[type="number"] {
     margin-right: 0.5rem;
+}
+
+/* Ensure both initiative roll input and bonus input have the same size */
+.initiative-entry input[type="number"],
+.initiative-entry input.bonus {
+    width: 80px;
 }
 
 /* Initiative Order Cards */
