@@ -1,0 +1,274 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header & Navigation */
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 2rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left h1 {
+    font-size: 1.5rem;
+}
+
+.nav-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none; /* Hidden on desktop, visible on mobile */
+}
+
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 5px 0;
+}
+
+.nav-right {
+    list-style: none;
+    display: flex;
+}
+
+.nav-right li {
+    margin-left: 1.5rem;
+}
+
+.nav-right li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-right li a:hover {
+    color: #f39c12;
+}
+
+/* Main Containers */
+.home-container,
+.about-container,
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Home Page */
+.home-welcome-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.home-welcome-box h2 {
+    margin-bottom: 1rem;
+}
+
+.home-welcome-box p {
+    margin-bottom: 1rem;
+}
+
+.cta-buttons {
+    margin-top: 1.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    margin: 0 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #f39c12;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #e67e22;
+}
+
+/* About Page */
+.about-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.about-box h2 {
+    margin-bottom: 1rem;
+}
+
+.about-box p {
+    margin-bottom: 1rem;
+}
+
+/* Tracker Page */
+.session-players-section,
+.initiative-rolls-section,
+.initiative-order-section {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.session-players-section h2,
+.initiative-rolls-section h2,
+.initiative-order-section h2 {
+    margin-bottom: 1rem;
+}
+
+/* Session Players List */
+.add-player-form {
+    margin-bottom: 1rem;
+}
+
+.add-player-form input[type="text"],
+.add-player-form input[type="number"] {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.add-player-form input[type="submit"] {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #27ae60;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-player-form input[type="submit"]:hover {
+    background: #219150;
+}
+
+.list-box ul {
+    list-style: none;
+}
+
+.list-box li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.list-box li.selected {
+    background: #f1f1f1;
+}
+
+/* Initiative Entries */
+.initiative-entry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.initiative-entry label {
+    flex: 1;
+}
+
+.initiative-entry input[type="number"] {
+    width: 60px;
+    margin-right: 0.5rem;
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.initiative-entry input.bonus {
+    width: 50px;
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Initiative Order Cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    background: #f7f7f7;
+    padding: 1rem;
+    border-radius: 3px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card.highlight {
+    transform: scale(1.05);
+    background: #f1c40f;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #333;
+    color: #fff;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-right {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+    }
+
+    .nav-right.active {
+        display: flex;
+    }
+
+    .nav-right li {
+        margin: 0.5rem 0;
+    }
+
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cta-button {
+        margin: 0.5rem 0;
+    }
+}
