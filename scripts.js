@@ -1,12 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Constants for localStorage keys
+    const STORAGE_PLAYERS_KEY = "dndTool_players";
+    const STORAGE_BONUSES_KEY = "dndTool_bonuses";
+
+    // Navigation Toggle
     const navToggle = document.querySelector(".nav-toggle");
     const navRight = document.querySelector(".nav-right");
 
-    navToggle.addEventListener("click", function () {
+    navToggle.addEventListener("click", () => {
         navRight.classList.toggle("active");
         navToggle.classList.toggle("active");
+        // Update aria-expanded attribute for accessibility
+        const expanded = navRight.classList.contains("active");
+        navToggle.setAttribute("aria-expanded", expanded);
     });
 
+    // DOM elements for the initiative tracker
     const addPlayerForm = document.getElementById("addPlayerForm");
     const sessionPlayersList = document.getElementById("sessionPlayersList");
     const clearSessionBtn = document.getElementById("clearSessionBtn");
@@ -32,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "James", bonus: 0 }
     ];
 
+    // Save players and their bonuses to localStorage
     function saveToLocalStorage() {
         const players = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent);
         const bonuses = {};
@@ -40,29 +52,33 @@ document.addEventListener("DOMContentLoaded", function () {
             const bonus = entry.querySelector("input.bonus").value || "0";
             bonuses[name] = bonus;
         });
-        localStorage.setItem("players", JSON.stringify(players));
-        localStorage.setItem("bonuses", JSON.stringify(bonuses));
+        localStorage.setItem(STORAGE_PLAYERS_KEY, JSON.stringify(players));
+        localStorage.setItem(STORAGE_BONUSES_KEY, JSON.stringify(bonuses));
     }
 
+    // Load players and bonuses from localStorage
     function loadFromLocalStorage() {
-        const players = JSON.parse(localStorage.getItem("players")) || [];
-        const bonuses = JSON.parse(localStorage.getItem("bonuses")) || {};
+        const players = JSON.parse(localStorage.getItem(STORAGE_PLAYERS_KEY)) || [];
+        const bonuses = JSON.parse(localStorage.getItem(STORAGE_BONUSES_KEY)) || {};
         players.forEach(name => addPlayerByName(name, bonuses[name]));
     }
 
+    // Add a player by name and create corresponding UI elements
     function addPlayerByName(playerName, bonus = "") {
         if (isDuplicateName(playerName)) return;
 
         const playerId = `player-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
+        // Create list item for session players
         const li = document.createElement("li");
         li.textContent = playerName;
         li.classList.add("player-item");
-        li.addEventListener("click", function () {
+        li.addEventListener("click", () => {
             li.classList.toggle("selected");
         });
         sessionPlayersList.appendChild(li);
 
+        // Create initiative entry for the player
         const initiativeEntry = document.createElement("li");
         initiativeEntry.classList.add("initiative-entry");
 
@@ -89,11 +105,14 @@ document.addEventListener("DOMContentLoaded", function () {
         initiativeEntry.appendChild(input);
         initiativeEntry.appendChild(bonusInput);
         initiativeEntries.appendChild(initiativeEntry);
-        // Save when bonus changes
-        bonusInput.addEventListener("input", () => {
-        saveToLocalStorage();
-    })};
 
+        // Save when bonus changes (could be debounced if necessary)
+        bonusInput.addEventListener("input", () => {
+            saveToLocalStorage();
+        });
+    }
+
+    // Update the current turn highlight in the initiative order
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
         cards.forEach(card => {
@@ -102,11 +121,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Check if a player name already exists (case-insensitive)
     function isDuplicateName(playerName) {
         const existingPlayers = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent.toLowerCase());
         return existingPlayers.includes(playerName.toLowerCase());
     }
 
+    // Update the visibility of action buttons based on the current state
     function updateButtonVisibility() {
         if (initiativeEntries.querySelectorAll(".initiative-entry").length === 0) {
             startRoundBtn.style.display = "none";
@@ -124,30 +145,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (removeFromSessionBtn) {
-        removeFromSessionBtn.addEventListener("click", function () {
+        removeFromSessionBtn.addEventListener("click", () => {
             const selectedPlayers = sessionPlayersList.querySelectorAll("li.selected");
-            
+
             if (selectedPlayers.length === 0) {
                 alert("Please select at least one player to remove.");
                 return;
             }
-    
+
             selectedPlayers.forEach(player => {
                 const playerName = player.textContent;
-                
                 // Remove from session list
                 player.remove();
-    
                 // Remove corresponding initiative entry
                 const initiativeEntry = Array.from(initiativeEntries.children).find(entry => {
-                    return entry.querySelector('label').textContent === playerName;
+                    return entry.querySelector("label").textContent === playerName;
                 });
-    
                 if (initiativeEntry) {
                     initiativeEntry.remove();
                 }
             });
-    
+
             // Update local storage and button visibility after removal
             saveToLocalStorage();
             updateButtonVisibility();
@@ -155,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (addPlayerForm) {
-        addPlayerForm.addEventListener("submit", function (event) {
+        addPlayerForm.addEventListener("submit", event => {
             event.preventDefault();
             const playerNameInput = addPlayerForm.querySelector('input[name="name"]');
             const playerName = playerNameInput.value.trim();
@@ -180,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (clearSessionBtn) {
-        clearSessionBtn.addEventListener("click", function () {
+        clearSessionBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to clear the session? This action cannot be undone.")) {
                 sessionPlayersList.innerHTML = "";
                 initiativeEntries.innerHTML = "";
@@ -200,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
     resetToDefaultsBtn.style.marginTop = "10px";
     clearSessionBtn.parentElement.appendChild(resetToDefaultsBtn);
 
-    resetToDefaultsBtn.addEventListener("click", function () {
+    resetToDefaultsBtn.addEventListener("click", () => {
         if (confirm("Reset everything and load default players?")) {
             sessionPlayersList.innerHTML = "";
             initiativeEntries.innerHTML = "";
@@ -214,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (startRoundBtn) {
-        startRoundBtn.addEventListener("click", function (event) {
+        startRoundBtn.addEventListener("click", event => {
             event.preventDefault();
 
             const initiativeList = [];
@@ -236,13 +254,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            // Sort by initiative roll descending
             initiativeList.sort((a, b) => b.roll - a.roll);
 
             initiativeGroups = [];
             let currentGroup = [];
             let currentRoll = initiativeList[0].roll;
 
-            initiativeList.forEach((player) => {
+            initiativeList.forEach(player => {
                 if (player.roll !== currentRoll) {
                     initiativeGroups.push(currentGroup);
                     currentGroup = [];
@@ -254,6 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             initiativeOrderContainer.innerHTML = "";
 
+            // Create cards for each initiative group
             initiativeGroups.forEach((group, groupIndex) => {
                 group.forEach(player => {
                     const card = document.createElement("div");
@@ -280,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (prevTurnBtn) {
-        prevTurnBtn.addEventListener("click", function () {
+        prevTurnBtn.addEventListener("click", () => {
             currentTurnIndex--;
             if (currentTurnIndex < 0) {
                 currentTurnIndex = initiativeGroups.length - 1;
@@ -290,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (nextTurnBtn) {
-        nextTurnBtn.addEventListener("click", function () {
+        nextTurnBtn.addEventListener("click", () => {
             currentTurnIndex++;
             if (currentTurnIndex >= initiativeGroups.length) {
                 currentTurnIndex = 0;
@@ -299,7 +319,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const storedPlayers = JSON.parse(localStorage.getItem("players"));
+    // Load players from localStorage if available; otherwise load defaults
+    const storedPlayers = JSON.parse(localStorage.getItem(STORAGE_PLAYERS_KEY));
     if (storedPlayers && storedPlayers.length > 0) {
         loadFromLocalStorage();
     } else {
