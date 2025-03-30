@@ -379,7 +379,6 @@ header .nav-right li a {
 .start-round-btn,
 .add-session-btn,
 .remove-session-btn {
-    padding-left: 10px;
     margin-top: 10px;
     align-self: flex-end;
 }
