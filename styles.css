@@ -60,6 +60,13 @@ nav {
     margin: 0;
 }
 
+/* Ensure the title link inherits the header styling */
+.nav-left h1 a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .nav-toggle {
     background: none;
     border: none;
@@ -230,7 +237,7 @@ main {
 
 .add-player-form input[type="text"],
 .add-player-form input[type="number"] {
-    /* These inputs inherit the global input styles above */
+    /* Inherits global input styles; only margin adjusted */
     margin-right: 0.5rem;
 }
 
@@ -280,12 +287,12 @@ main {
 }
 
 .initiative-entry input[type="number"] {
-    /* Inherit global styles */
+    /* Inherits global styles; only margin adjusted */
     margin-right: 0.5rem;
 }
 
 .initiative-entry input.bonus {
-    /* Inherit global styles */
+    /* Inherits global styles */
 }
 
 /* Initiative Order Cards */
