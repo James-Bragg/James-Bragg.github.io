@@ -21,15 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let initiativeGroups = [];
 
     const defaultPlayerData = [
-        { name: "Enemy", bonus: 2 },
-        { name: "Friend", bonus: 1 },
-        { name: "Emma", bonus: 3 },
+        { name: "Enemy", bonus: 0 },
+        { name: "Friend", bonus: 0 },
+        { name: "Emma", bonus: 0 },
         { name: "Damian", bonus: 0 },
-        { name: "Dom", bonus: 2 },
-        { name: "Ryan", bonus: 1 },
+        { name: "Dom", bonus: 0 },
+        { name: "Ryan", bonus: 0 },
         { name: "David", bonus: 0 },
         { name: "World", bonus: 0 },
-        { name: "James", bonus: 1 }
+        { name: "James", bonus: 0 }
     ];
 
     function saveToLocalStorage() {
