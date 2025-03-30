@@ -67,6 +67,11 @@ nav {
     cursor: pointer;
 }
 
+/* Hover state for title link, matching nav links */
+.nav-left h1 a:hover {
+    color: #bb86fc;
+}
+
 .nav-toggle {
     background: none;
     border: none;
@@ -85,6 +90,8 @@ nav {
 .nav-right {
     list-style: none;
     display: flex;
+    /* Allow wrapping in case of tight spaces */
+    flex-wrap: wrap;
 }
 
 .nav-right li {
@@ -105,16 +112,16 @@ nav {
 /* Dropdown menu styling for small screens */
 @media (max-width: 768px) {
     .nav-right {
-        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
         width: 100%;
-        display: none;
+        flex-direction: column;
         background: #1f1f1f;
         border-top: 1px solid #333;
         padding: 0.5rem 0;
-        margin-top: 0.5rem;
-    }
-    .nav-right.active {
-        display: flex;
+        /* Remove margin to use full width */
+        margin: 0;
     }
     .nav-right li {
         margin: 0.5rem 0;
@@ -125,9 +132,6 @@ nav {
         display: block;
         width: 100%;
         padding: 0.5rem 1rem;
-        color: #fff;
-        text-decoration: none;
-        transition: background 0.3s ease;
         font-size: 0.9rem;
     }
     .nav-right li a:hover {
@@ -135,10 +139,10 @@ nav {
     }
 }
 
-/* Ensure main content doesn't get hidden behind the fixed header and add extra spacing */
+/* Ensure main content doesn't get hidden behind the fixed header */
 main {
     flex: 1;
-    margin-top: 50px;  /* Increased top margin creates space between header and content */
+    margin-top: 70px;  /* Increased top margin to fully clear the header */
 }
 
 /* Main Containers for Home, About, and Tracker pages */
@@ -237,7 +241,6 @@ main {
 
 .add-player-form input[type="text"],
 .add-player-form input[type="number"] {
-    /* Inherits global input styles; only margin adjusted */
     margin-right: 0.5rem;
 }
 
@@ -287,12 +290,7 @@ main {
 }
 
 .initiative-entry input[type="number"] {
-    /* Inherits global styles; only margin adjusted */
     margin-right: 0.5rem;
-}
-
-.initiative-entry input.bonus {
-    /* Inherits global styles */
 }
 
 /* Initiative Order Cards */
