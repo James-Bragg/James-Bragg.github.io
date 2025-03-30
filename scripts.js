@@ -254,11 +254,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    updateButtonVisibility();
     const storedPlayers = JSON.parse(localStorage.getItem("players"));
     if (storedPlayers && storedPlayers.length > 0) {
         loadFromLocalStorage();
     } else {
         defaultPlayerNames.forEach(name => addPlayerByName(name));
     }
+    updateButtonVisibility();
 });
