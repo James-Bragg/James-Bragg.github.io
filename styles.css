@@ -379,8 +379,9 @@ header .nav-right li a {
 .start-round-btn,
 .add-session-btn,
 .remove-session-btn {
-    margin-top: 10px;
-    align-self: flex-end;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
 }
 
 .initiative-entry input.bonus {
