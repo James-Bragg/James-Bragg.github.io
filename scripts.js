@@ -20,7 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentTurnIndex = 0;
     let initiativeGroups = [];
 
-    const defaultPlayerNames = ["Enemy", "Friend", "Emma", "Damian", "Dom", "Ryan", "David", "World", "James"];
+    const defaultPlayerData = [
+        { name: "Enemy", bonus: 2 },
+        { name: "Friend", bonus: 1 },
+        { name: "Emma", bonus: 3 },
+        { name: "Damian", bonus: 0 },
+        { name: "Dom", bonus: 2 },
+        { name: "Ryan", bonus: 1 },
+        { name: "David", bonus: 0 },
+        { name: "World", bonus: 0 },
+        { name: "James", bonus: 1 }
+    ];
 
     function saveToLocalStorage() {
         const players = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent);
@@ -166,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
             currentTurnIndex = 0;
             initiativeGroups = [];
             localStorage.clear();
-            defaultPlayerNames.forEach(name => addPlayerByName(name));
+            defaultPlayerData.forEach(player => addPlayerByName(player.name, player.bonus));
             updateButtonVisibility();
         }
     });
@@ -261,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (storedPlayers && storedPlayers.length > 0) {
         loadFromLocalStorage();
     } else {
-        defaultPlayerNames.forEach(name => addPlayerByName(name));
+        defaultPlayerData.forEach(player => addPlayerByName(player.name, player.bonus));
     }
     updateButtonVisibility();
 });
