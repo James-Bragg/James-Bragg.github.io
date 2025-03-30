@@ -89,9 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
         initiativeEntry.appendChild(input);
         initiativeEntry.appendChild(bonusInput);
         initiativeEntries.appendChild(initiativeEntry);
-
+        // Save when bonus changes
+        bonusInput.addEventListener("input", () => {
         saveToLocalStorage();
-    }
+    })};
 
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
