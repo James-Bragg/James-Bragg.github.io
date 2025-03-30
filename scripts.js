@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-
-    // === NAVIGATION TOGGLE ===
     const navToggle = document.querySelector(".nav-toggle");
     const navRight = document.querySelector(".nav-right");
 
@@ -9,8 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
         navToggle.classList.toggle("active");
     });
 
-
-    // === ELEMENT REFERENCES ===
     const addPlayerForm = document.getElementById("addPlayerForm");
     const sessionPlayersList = document.getElementById("sessionPlayersList");
     const clearSessionBtn = document.getElementById("clearSessionBtn");
@@ -21,15 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevTurnBtn = document.getElementById("prevTurnBtn");
     const nextTurnBtn = document.getElementById("nextTurnBtn");
 
-
-    // === GAME STATE ===
     let currentTurnIndex = 0;
     let initiativeGroups = [];
 
     const defaultPlayerNames = ["Enemy", "Friend", "Emma", "Damian", "Dom", "Ryan", "David", "World", "James"];
 
-
-    // === LOCAL STORAGE FUNCTIONS ===
     function saveToLocalStorage() {
         const players = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent);
         const bonuses = {};
@@ -48,8 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
         players.forEach(name => addPlayerByName(name, bonuses[name]));
     }
 
-
-    // === PLAYER MANAGEMENT ===
     function addPlayerByName(playerName, bonus = "") {
         if (isDuplicateName(playerName)) return;
 
@@ -122,8 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
-    // === EVENT LISTENERS ===
     if (addPlayerForm) {
         addPlayerForm.addEventListener("submit", function (event) {
             event.preventDefault();
@@ -175,13 +163,11 @@ document.addEventListener("DOMContentLoaded", function () {
             currentTurnIndex = 0;
             initiativeGroups = [];
             localStorage.clear();
-            defaultPlayerNames.forEach(name => addPlayerByName(name));
+            defaultPlayerData.forEach(player => addPlayerByName(player.name, player.bonus));
             updateButtonVisibility();
         }
     });
 
-
-    // === INITIATIVE ROUND LOGIC ===
     if (startRoundBtn) {
         startRoundBtn.addEventListener("click", function (event) {
             event.preventDefault();
@@ -248,8 +234,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-    // === TURN NAVIGATION ===
     if (prevTurnBtn) {
         prevTurnBtn.addEventListener("click", function () {
             currentTurnIndex--;
@@ -271,12 +255,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     updateButtonVisibility();
-
-    // === INITIALIZATION ===
     const storedPlayers = JSON.parse(localStorage.getItem("players"));
     if (storedPlayers && storedPlayers.length > 0) {
         loadFromLocalStorage();
     } else {
-        defaultPlayerNames.forEach(name => addPlayerByName(name));
+        defaultPlayerData.forEach(player => addPlayerByName(player.name, player.bonus));
     }
 });
