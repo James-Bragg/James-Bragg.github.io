@@ -1,17 +1,33 @@
 :root {
-    --primary-color: #9b1010;
-    --secondary-color: #9b1010;
+    /* Updated modern color scheme */
+    --primary-color: #6200ea;  /* Vibrant purple */
+    --secondary-color: #03dac6; /* Teal accent */
     --background-color: #121212;
     --foreground-color: #ffffff;
     --dark-background: #1f1f1f;
     --medium-background: #2c2c2c;
-    --light-background: #333;
-    --highlight-background: #444;
+    --light-background: #333333;
+    --highlight-background: #444444;
+    
     --font-size-default: 16px;
     --font-size-large: 28px;
-    --border-radius: 5px;
-    --box-shadow-default: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    --box-shadow-hover: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    --border-radius: 8px;
+    
+    --box-shadow-default: 0px 6px 15px rgba(0, 0, 0, 0.25);
+    --box-shadow-hover: 0px 10px 25px rgba(0, 0, 0, 0.35);
+    --transition-speed: 0.3s;
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 body {
@@ -23,6 +39,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 button, input[type="submit"] {
@@ -34,13 +51,14 @@ button, input[type="submit"] {
     cursor: pointer;
     font-size: var(--font-size-default);
     box-shadow: var(--box-shadow-default);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
     white-space: nowrap;
 }
 
 button:hover, input[type="submit"]:hover {
     background-color: var(--secondary-color);
     box-shadow: var(--box-shadow-hover);
+    transform: translateY(-2px);
 }
 
 input[type="text"], input[type="number"] {
@@ -49,7 +67,7 @@ input[type="text"], input[type="number"] {
     border-radius: var(--border-radius);
     background-color: var(--medium-background);
     color: var(--foreground-color);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     font-size: var(--font-size-default);
     width: 100%;
     box-sizing: border-box;
@@ -57,7 +75,7 @@ input[type="text"], input[type="number"] {
 
 input[type="text"]:focus, input[type="number"]:focus {
     border-color: var(--primary-color);
-    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+    box-shadow: 0px 0px 5px rgba(3, 218, 198, 0.5);
 }
 
 header {
@@ -68,6 +86,7 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
+    animation: fadeIn 0.5s ease;
 }
 
 header nav {
@@ -80,7 +99,7 @@ header nav {
 
 header .nav-left {
     flex-shrink: 0;
-    margin-right: 20px; /* Add space between title and buttons */
+    margin-right: 20px;
 }
 
 header .nav-left h1 {
@@ -94,12 +113,12 @@ header .nav-right {
     margin: 0;
     padding: 0;
     justify-content: flex-end;
-    gap: 10px; /* Add space between buttons */
-    flex-wrap: wrap; /* Allow wrapping if needed */
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 header .nav-right li {
-    flex: 1 1 auto; /* Allow items to grow and shrink as needed */
+    flex: 1 1 auto;
     display: flex;
     justify-content: center;
 }
@@ -114,7 +133,7 @@ header .nav-right li a {
     font-size: var(--font-size-default);
     font-weight: bold;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     white-space: nowrap;
     width: 100%;
     text-align: center;
@@ -143,41 +162,38 @@ header .nav-right li a:hover {
     font-size: 24px;
 }
 
-.nav-toggle.active span {
-    display: none;
-}
-
 .nav-toggle::before {
-    content: "\2630"; /* Unicode for hamburger icon */
+    content: "\2630";
     font-size: 24px;
     color: white;
     display: block;
     text-align: center;
+    transition: transform var(--transition-speed) ease;
 }
 
 .nav-toggle.active::before {
-    content: "\2715"; /* Unicode for 'X' icon when active */
-    font-size: 24px;
+    content: "\2715";
+    transform: rotate(180deg);
 }
 
 /* Mobile Menu */
 .nav-right {
-    transition: max-height 0.3s ease, visibility 0.3s ease;
+    transition: max-height var(--transition-speed) ease, visibility var(--transition-speed) ease;
     overflow: hidden;
-    background-color: var(--dark-background); /* Ensure menu background is consistent */
+    background-color: var(--dark-background);
     width: 100%;
     position: absolute;
     top: 60px;
     left: 0;
     z-index: 1000;
     flex-direction: column;
-    visibility: hidden; /* Start hidden */
-    max-height: 0; /* Start collapsed */
+    visibility: hidden;
+    max-height: 0;
 }
 
 .nav-right.active {
-    max-height: 300px; /* Expand to show items */
-    visibility: visible; /* Make visible */
+    max-height: 300px;
+    visibility: visible;
     padding: 10px 0;
 }
 
@@ -194,23 +210,21 @@ header .nav-right li a {
     color: white;
 }
 
-
 /* Desktop and Tablet View */
 @media (min-width: 769px) {
     .nav-right {
-        display: flex; /* Flex on larger screens */
+        display: flex;
         position: static;
         visibility: visible;
         max-height: none;
         flex-direction: row;
         justify-content: flex-end;
         padding: 0;
-        gap: 10px; /* Maintain gap between buttons */
-        flex-wrap: nowrap; /* Ensure items don't wrap */
+        gap: 10px;
+        flex-wrap: nowrap;
     }
-
     .nav-toggle {
-        display: none; /* Hide toggle button on larger screens */
+        display: none;
     }
 }
 
@@ -219,10 +233,16 @@ header .nav-right li a {
     .nav-toggle {
         display: flex;
     }
-
     .nav-right.active {
         display: flex;
     }
+}
+
+.home-container,
+.resources-container,
+.about-container,
+.main-container {
+    animation: fadeIn 0.5s ease;
 }
 
 .home-container {
@@ -235,7 +255,7 @@ header .nav-right li a {
 
 .home-welcome-box {
     background-color: var(--medium-background);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 30px;
     width: 80%;
@@ -246,7 +266,7 @@ header .nav-right li a {
 
 .home-welcome-box h2 {
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: var(--font-size-large);
     color: var(--foreground-color);
 }
 
@@ -270,8 +290,8 @@ header .nav-right li a {
     text-decoration: none;
     font-size: var(--font-size-default);
     font-weight: bold;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    box-shadow: var(--box-shadow-default);
 }
 
 .cta-button:hover {
@@ -289,7 +309,7 @@ header .nav-right li a {
 
 .resources-box {
     background-color: var(--medium-background);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 30px;
     width: 80%;
@@ -299,7 +319,7 @@ header .nav-right li a {
 
 .resources-box h2 {
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: var(--font-size-large);
     color: var(--foreground-color);
 }
 
@@ -323,7 +343,7 @@ header .nav-right li a {
 .resources-box ul li a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color var(--transition-speed) ease;
 }
 
 .resources-box ul li a:hover {
@@ -341,7 +361,7 @@ header .nav-right li a {
 
 .left-box, .right-box {
     background-color: var(--dark-background);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 20px;
     width: 48%;
@@ -357,7 +377,7 @@ header .nav-right li a {
 .initiative-order-section {
     background-color: var(--medium-background);
     padding: 15px;
-    border-radius: 8px;
+    border-radius: calc(var(--border-radius) - 2px);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     flex: 1;
     margin-bottom: 20px;
@@ -395,13 +415,13 @@ header .nav-right li a {
 
 .initiative-entry input.bonus:focus {
     border-color: var(--primary-color);
-    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+    box-shadow: 0px 0px 5px rgba(3, 218, 198, 0.5);
 }
 
 .list-box {
     flex: 1;
     background-color: var(--light-background);
-    border-radius: 8px;
+    border-radius: calc(var(--border-radius) - 2px);
     padding: 10px;
     margin-top: 15px;
     margin-bottom: 20px;
@@ -430,7 +450,7 @@ header .nav-right li a {
     cursor: pointer;
     background-color: var(--highlight-background);
     border-radius: var(--border-radius);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
     width: 100%;
     box-sizing: border-box;
 }
@@ -453,6 +473,7 @@ header .nav-right li a {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    perspective: 1000px;
 }
 
 .card {
@@ -465,15 +486,16 @@ header .nav-right li a {
     background-color: #2c3e50;
     color: white;
     margin: 5px;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) rotateY(8deg);
     background-color: #555;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
 }
 
 .card .player-name {
@@ -492,7 +514,7 @@ header .nav-right li a {
 .card.highlight {
     border: 2px solid var(--primary-color);
     background-color: var(--highlight-background);
-    box-shadow: 0px 0px 10px rgba(52, 152, 219, 0.8);
+    box-shadow: 0px 0px 10px rgba(3, 218, 198, 0.8);
 }
 
 #initiativeOrder {
@@ -521,7 +543,7 @@ footer {
 
 .about-box {
     background-color: var(--medium-background);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 30px;
     width: 80%;
@@ -532,7 +554,7 @@ footer {
 
 .about-box h2 {
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: var(--font-size-large);
     color: var(--foreground-color);
 }
 
@@ -541,13 +563,14 @@ footer {
     line-height: 1.6;
 }
 
+/* Initiative Roll Section */
 .initiative-rolls-section {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     background-color: var(--medium-background);
 }
@@ -587,124 +610,32 @@ footer {
 
 .initiative-entry input[type="number"]:focus {
     border-color: var(--primary-color);
-    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+    box-shadow: 0px 0px 5px rgba(3, 218, 198, 0.5);
 }
 
-@media (min-width: 769px) {
-    .nav-right {
-        display: flex; /* Flex on larger screens */
-        position: static;
-        visibility: visible;
-        max-height: none;
-        flex-direction: row;
-        justify-content: flex-end;
-        padding: 0;
-        gap: 10px; /* Maintain gap between buttons */
-        flex-wrap: nowrap; /* Ensure items don't wrap */
-    }
-
-    .nav-toggle {
-        display: none; /* Hide toggle button on larger screens */
-    }
-}
-
-@media (max-width: 768px) {
-    header nav {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
-    }
-
-    .nav-left {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .nav-toggle {
-        display: flex;
-    }
-
-    .nav-right.active {
-        display: flex;
-    }
-
-    .main-container {
-        flex-direction: column;
-        padding: 80px 20px 20px;
-    }
-
-    .left-box, .right-box {
-        width: 100%;
-    }
-
-    .home-welcome-box, .resources-box {
-        width: 90%;
-    }
-
-    .cta-buttons {
-        flex-direction: column;
-    }
-    
-    .cta-button {
-        margin-bottom: 10px;
-    }
-
-    .navigation button {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-
-    .card {
-        width: 80px;
-        height: 100px;
-    }
-
-    .card .player-name {
-        font-size: 10px;
-    }
-
-    .card span {
-        font-size: 20px;
-    }
-}
-
+/* Responsive adjustments for smaller screens */
 @media (max-width: 480px) {
     .main-container {
         padding: 60px 10px 10px;
     }
-
-    .left-box, .right-box {
+    .left-box, .right-box,
+    .home-welcome-box, .resources-box,
+    .about-box {
         width: 100%;
     }
-
-    .home-welcome-box, .resources-box {
-        width: 100%;
-    }
-
     .card {
         width: 70px;
         height: 90px;
     }
-
     .card .player-name {
         font-size: 8px;
     }
-
     .card span {
         font-size: 18px;
     }
-
-    .about-box {
-        width: 90%;
-        padding: 20px;
-    }
-
     .about-box h2 {
         font-size: 24px;
     }
-
     .about-box p {
         font-size: 16px;
     }
