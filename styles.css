@@ -350,8 +350,38 @@ header .nav-right li a {
 }
 
 /* Section styles for saved players, current session, and initiative order */
-.saved-players-section,
-.current-session-players-section,
+.saved-players-section {
+    background-color: var(--medium-background);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    flex: 1;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.current-session-players-section {
+    background: linear-gradient(135deg, var(--medium-background), var(--dark-background));
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.current-session-players-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
 .initiative-order-section {
     background-color: var(--medium-background);
     padding: 15px;
