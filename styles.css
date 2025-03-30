@@ -13,18 +13,25 @@ body {
     flex-direction: column;
 }
 
-/* Main content expands so footer is pushed to the bottom */
-main {
-    flex: 1;
-}
-
-/* Header & Navigation */
+/* Header always visible (fixed) and smaller */
 header {
     background: #1f1f1f;
     color: #fff;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem; /* Reduced padding for a smaller header */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
+/* Ensure main content doesn't get hidden behind the fixed header */
+main {
+    flex: 1;
+    margin-top: 60px;  /* Adjust this value if your header height changes */
+}
+
+/* Header & Navigation */
 nav {
     display: flex;
     justify-content: space-between;
