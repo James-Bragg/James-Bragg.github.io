@@ -1,79 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Manage your Dungeons & Dragons initiative order and other game aspects easily with the D&D Tool Assister.">
-  <meta name="keywords" content="D&D, Dungeons and Dragons, Initiative Tracker, Tabletop, Role-playing game">
-  <title>D&D Tool Assister - Initiative Tracker</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your Dungeons & Dragons initiative order and other game aspects easily with the D&D Tool Assister.">
+    <meta name="keywords" content="D&D, Dungeons and Dragons, Initiative Tracker, Tabletop, Role-playing game">
+    <title>D&D Tool Assister - Initiative Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
 </head>
+
 <body>
-  <header>
-    <nav>
-      <div class="nav-left">
-        <h1>D&D Tool Assister</h1>
-        <button class="nav-toggle" aria-label="Toggle Navigation">
-          <span></span>
-        </button>
-      </div>
-      <ul class="nav-right">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="tracker.html">Initiative Tracker</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main class="main-container">
-    <section class="left-box session-players-section" aria-labelledby="session-players-heading">
-      <h2 id="session-players-heading">Session Players</h2>
-      <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
-        <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name" title="Enter the name of the player to add them to the session">
-        <input type="number" name="bonus" placeholder="+bonus" title="Optional initiative bonus" style="width: 80px;">
-        <input type="submit" value="Add Player" title="Click to add the player to the session">
-      </form>
-      <div class="list-box">
-        <ul id="sessionPlayersList" aria-live="polite">
-          <!-- Session player list will be handled by JavaScript -->
-        </ul>
-      </div>
-      <div class="session-controls">
-        <button id="clearSessionBtn" aria-label="Clear Session" title="Clear all players and initiative rolls from the session">Clear Session</button>
-        <button id="removeFromSessionBtn" aria-label="Remove Selected Players" title="Remove selected players from the session">Remove Selected</button>
-      </div>
-    </section>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <h1>D&D Tool Assister</h1>
+                <button class="nav-toggle" aria-label="Toggle Navigation">
+                    <span></span>
+                </button>
+            </div>
+            <ul class="nav-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tracker.html">Initiative Tracker</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+        <section class="left-box session-players-section" aria-labelledby="session-players-heading">
+            <h2 id="session-players-heading">Session Players</h2>
+            <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
+                <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name" title="Enter the name of the player to add them to the session">
+                <input type="number" name="bonus" placeholder="+bonus" title="Optional initiative bonus" style="width: 80px;">
+                <input type="submit" value="Add Player" title="Click to add the player to the session">
+            </form>
+            <div class="list-box">
+                <ul id="sessionPlayersList" aria-live="polite">
+                    <!-- Session player list will be handled by JavaScript -->
+                </ul>
+            </div>
+            <div class="session-controls">
+                <button id="clearSessionBtn" aria-label="Clear Session" title="Clear all players and initiative rolls from the session">Clear Session</button>
+                <button id="removeFromSessionBtn" aria-label="Remove Selected Players" title="Remove selected players from the session">Remove Selected</button>
+            </div>
+        </section>
 
-    <section class="right-box initiative-rolls-section" aria-labelledby="initiative-rolls-heading">
-      <h2 id="initiative-rolls-heading">Initiative Rolls</h2>
-      <form id="initiativeForm" aria-label="Initiative Rolls Form">
-        <ul id="initiativeEntries" aria-live="polite">
-          <!-- Initiative entries will be handled by JavaScript -->
-        </ul>
-        <button type="submit" class="start-round-btn" aria-label="Start Round">Start Round</button>
-      </form>
-    </section>
+        <section class="right-box initiative-rolls-section" aria-labelledby="initiative-rolls-heading">
+            <h2 id="initiative-rolls-heading">Initiative Rolls</h2>
+            <form id="initiativeForm" aria-label="Initiative Rolls Form">
+                <ul id="initiativeEntries" aria-live="polite">
+                    <!-- Initiative entries will be handled by JavaScript -->
+                </ul>
+                <button type="submit" class="start-round-btn" aria-label="Start Round">Start Round</button>
+            </form>
+        </section>
 
-    <section class="right-box initiative-order-section" aria-labelledby="initiative-order-heading">
-      <h2 id="initiative-order-heading">Initiative Order</h2>
-      <div id="initiativeOrder" class="card-container">
-        <!-- Initiative order will be handled by JavaScript -->
-      </div>
-      <div class="navigation">
-        <button id="prevTurnBtn" aria-label="Previous Turn">Previous Turn</button>
-        <button id="nextTurnBtn" aria-label="Next Turn">Next Turn</button>
-      </div>
-    </section>
-  </main>
-  
-  <footer>
-    <p>&copy; 2024 D&D Tool Assister. All rights reserved.</p>
-  </footer>
-  <script src="scripts.js" defer></script>
+        <section class="right-box initiative-order-section" aria-labelledby="initiative-order-heading">
+            <h2 id="initiative-order-heading">Initiative Order</h2>
+            <div id="initiativeOrder" class="card-container">
+                <!-- Initiative order will be handled by JavaScript -->
+            </div>
+            <div class="navigation">
+                <button id="prevTurnBtn" aria-label="Previous Turn">Previous Turn</button>
+                <button id="nextTurnBtn" aria-label="Next Turn">Next Turn</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 D&D Tool Assister. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js" defer></script>
 </body>
+
 </html>
