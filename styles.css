@@ -76,7 +76,7 @@ nav {
     background: none;
     border: none;
     cursor: pointer;
-    display: none; /* Hidden on desktop, will be enabled in mobile view */
+    display: none; /* Hidden on desktop, enabled in mobile view */
 }
 
 .nav-toggle span {
@@ -115,7 +115,7 @@ nav {
     }
     .nav-right {
          position: absolute;
-         top: calc(100% + 5px);  /* 5px gap below the header */
+         top: 100%;  /* Directly beneath the header */
          left: 0;
          width: 100%;
          flex-direction: column;
@@ -124,10 +124,14 @@ nav {
          padding: 0.5rem 0;
          margin: 0;
          z-index: 1000;
-         display: none !important;
+         overflow: hidden;
+         max-height: 0;
+         opacity: 0;
+         transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
     }
     .nav-right.active {
-         display: flex !important;
+         max-height: 300px; /* Enough space for 3 lines */
+         opacity: 1;
     }
     .nav-right li {
          margin: 0.5rem 0;
@@ -148,7 +152,7 @@ nav {
 /* Ensure main content doesn't get hidden behind the fixed header */
 main {
     flex: 1;
-    margin-top: 100px;  /* Increased top margin creates a gap between header and content */
+    margin-top: 100px;  /* Creates a gap between header and content */
 }
 
 /* Main Containers for Home, About, and Tracker pages */
