@@ -36,15 +36,13 @@ textarea:focus {
     border-color: #03dac6;
 }
 
-/* Header always visible (fixed) and smaller */
+/* Header using sticky positioning */
 header {
     background: #1f1f1f;
     color: #fff;
     padding: 0.2rem 1rem;  /* Minimal padding for a compact header */
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
@@ -149,10 +147,11 @@ nav {
     }
 }
 
-/* Ensure main content doesn't get hidden behind the fixed header */
+/* Main content now flows naturally below the sticky header */
 main {
     flex: 1;
-    margin-top: 100px;  /* Creates a gap between header and content */
+    /* Remove the large margin-top since header is in normal flow */
+    margin-top: 0;
 }
 
 /* Main Containers for Home, About, and Tracker pages */
