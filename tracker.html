@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +13,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
 </head>
-
 <body>
     <header>
         <nav>
@@ -27,7 +25,6 @@
             <ul class="nav-right">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="tracker.html">Initiative Tracker</a></li>
-                <li><a href="resources.html">Resources</a></li>
                 <li><a href="about.html">About</a></li>
             </ul>
         </nav>
@@ -37,7 +34,7 @@
             <h2 id="session-players-heading">Session Players</h2>
             <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
                 <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name" title="Enter the name of the player to add them to the session">
-                <input type="number" name="bonus" placeholder="+bonus" title="Optional initiative bonus" style="width: 80px;">
+                <input type="number" name="bonus" placeholder="+bonus" title="Optional initiative bonus">
                 <input type="submit" value="Add Player" title="Click to add the player to the session">
             </form>
             <div class="list-box">
@@ -50,17 +47,20 @@
                 <button id="removeFromSessionBtn" aria-label="Remove Selected Players" title="Remove selected players from the session">Remove Selected</button>
             </div>
         </section>
-
         <section class="right-box initiative-rolls-section" aria-labelledby="initiative-rolls-heading">
             <h2 id="initiative-rolls-heading">Initiative Rolls</h2>
+            <div class="initiative-rolls-container">  
             <form id="initiativeForm" aria-label="Initiative Rolls Form">
                 <ul id="initiativeEntries" aria-live="polite">
                     <!-- Initiative entries will be handled by JavaScript -->
                 </ul>
-                <button type="submit" class="start-round-btn" aria-label="Start Round">Start Round</button>
+                <div class ="roll-controls">
+                    <button type="button" id="rollInitiativeBtn" aria-label="Roll Initiative" title="Roll initiative for all players">Roll Initiative</button>
+                    <button type="button" id="clearInitiativeBtn" aria-label="Clear Initiative Rolls" title="Clear all initiative rolls">Clear Rolls</button>
+                </div>
             </form>
+            </div>
         </section>
-
         <section class="right-box initiative-order-section" aria-labelledby="initiative-order-heading">
             <h2 id="initiative-order-heading">Initiative Order</h2>
             <div id="initiativeOrder" class="card-container">
@@ -72,12 +72,10 @@
             </div>
         </section>
     </main>
-
     <footer>
         <p>&copy; 2024 D&D Tool Assister. All rights reserved.</p>
     </footer>
 
     <script src="scripts.js" defer></script>
 </body>
-
 </html>
