@@ -117,6 +117,8 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
             const playerNameInput = addPlayerForm.querySelector('input[name="name"]');
             const playerName = playerNameInput.value.trim();
+            const bonusInput = addPlayerForm.querySelector('input[name="bonus"]');
+            const bonus = bonusInput.value.trim();
 
             if (!playerName) {
                 alert("Player name cannot be empty. Please enter a valid name.");
@@ -128,8 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            addPlayerByName(playerName);
+            addPlayerByName(playerName, bonus);
             playerNameInput.value = "";
+            bonusInput.value = "";
             updateButtonVisibility();
         });
     }
