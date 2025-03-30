@@ -17,21 +17,15 @@ body {
 header {
     background: #1f1f1f;
     color: #fff;
-    padding: 0.25rem 1rem; /* Reduced padding for a smaller header */
+    padding: 0.2rem 1rem;  /* Minimal padding for a compact header */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-/* Ensure main content doesn't get hidden behind the fixed header */
-main {
-    flex: 1;
-    margin-top: 40px;  /* Adjusted top margin to match the smaller header */
-}
-
-/* Header & Navigation */
 nav {
     display: flex;
     justify-content: space-between;
@@ -39,7 +33,8 @@ nav {
 }
 
 .nav-left h1 {
-    font-size: 1.2rem;  /* Smaller font size for a more compact header */
+    font-size: 1rem;  /* Smaller heading text */
+    margin: 0;
 }
 
 .nav-toggle {
@@ -54,7 +49,7 @@ nav {
     width: 25px;
     height: 3px;
     background: #fff;
-    margin: 5px 0;
+    margin: 4px 0;  /* Reduced margin */
 }
 
 .nav-right {
@@ -63,12 +58,13 @@ nav {
 }
 
 .nav-right li {
-    margin-left: 1.5rem;
+    margin-left: 0.5rem;  /* Reduced spacing between links */
 }
 
 .nav-right li a {
     color: #fff;
     text-decoration: none;
+    font-size: 0.9rem;  /* Slightly smaller link text */
     transition: color 0.3s ease;
 }
 
@@ -102,10 +98,17 @@ nav {
         color: #fff;
         text-decoration: none;
         transition: background 0.3s ease;
+        font-size: 0.9rem;
     }
     .nav-right li a:hover {
         background: #333;
     }
+}
+
+/* Ensure main content doesn't get hidden behind the fixed header and add extra spacing */
+main {
+    flex: 1;
+    margin-top: 50px;  /* Increased top margin creates space between header and content */
 }
 
 /* Main Containers for Home, About, and Tracker pages */
@@ -234,6 +237,12 @@ nav {
     padding: 0.5rem;
     border-bottom: 1px solid #333;
     cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Highlight session players on hover */
+.list-box li:hover {
+    background: #444;
 }
 
 .list-box li.selected {
@@ -277,6 +286,7 @@ nav {
     gap: 1rem;
 }
 
+/* Add 3D interactive hover effect to cards */
 .card {
     background: #2c2c2c;
     padding: 1rem;
@@ -284,12 +294,23 @@ nav {
     width: 150px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: perspective(1000px);
+}
+
+.card:hover {
+    transform: perspective(1000px) translateY(-5px) rotateX(2deg) rotateY(2deg) scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.5);
 }
 
 .card.highlight {
     transform: scale(1.05);
     background: #bb86fc;
+}
+
+/* Spacing for Initiative Order: Add margin above navigation buttons */
+.initiative-order-section .navigation {
+    margin-top: 1rem;
 }
 
 /* Button Styling for Tracker Sections */
@@ -314,11 +335,12 @@ nav {
     background: #01bfa5;
 }
 
-/* Footer */
+/* Footer - made small to match header */
 footer {
     text-align: center;
-    padding: 1rem;
+    padding: 0.25rem;
     background: #1f1f1f;
     color: #e0e0e0;
     margin-top: 2rem;
+    font-size: 0.8rem;
 }
