@@ -123,6 +123,37 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    if (removeFromSessionBtn) {
+        removeFromSessionBtn.addEventListener("click", function () {
+            const selectedPlayers = sessionPlayersList.querySelectorAll("li.selected");
+            
+            if (selectedPlayers.length === 0) {
+                alert("Please select at least one player to remove.");
+                return;
+            }
+    
+            selectedPlayers.forEach(player => {
+                const playerName = player.textContent;
+                
+                // Remove from session list
+                player.remove();
+    
+                // Remove corresponding initiative entry
+                const initiativeEntry = Array.from(initiativeEntries.children).find(entry => {
+                    return entry.querySelector('label').textContent === playerName;
+                });
+    
+                if (initiativeEntry) {
+                    initiativeEntry.remove();
+                }
+            });
+    
+            // Update local storage and button visibility after removal
+            saveToLocalStorage();
+            updateButtonVisibility();
+        });
+    }
+
     if (addPlayerForm) {
         addPlayerForm.addEventListener("submit", function (event) {
             event.preventDefault();
