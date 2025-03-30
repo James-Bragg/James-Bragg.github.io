@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateButtonVisibility() {
-        if (initiativeEntries.children.length === 0) {
+        if (initiativeEntries.querySelectorAll(".initiative-entry").length === 0) {
             startRoundBtn.style.display = "none";
         } else {
             startRoundBtn.style.display = "inline-block";
