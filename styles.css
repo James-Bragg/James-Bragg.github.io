@@ -1,3 +1,46 @@
+
+/* === Root Variables === */
+
+/* === Utility Variables === */
+:root {
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --text-center: center;
+    --max-card-width: 90px;
+}
+
+/* === Utility Classes === */
+.text-center {
+    text-align: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.action-btn {
+    margin-top: var(--spacing-sm);
+    align-self: flex-end;
+}
+
+.input-compact {
+    width: 60px;
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius);
+    border: 1px solid #555;
+    background-color: var(--light-background);
+    color: var(--foreground-color);
+}
+
 :root {
     --primary-color: #9b1010;
     --secondary-color: #9b1010;
@@ -14,6 +57,8 @@
     --box-shadow-hover: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
 
+
+/* === Base Styles === */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--background-color);
@@ -25,6 +70,8 @@ body {
     min-height: 100vh;
 }
 
+
+/* === Button Styles === */
 button, input[type="submit"] {
     background-color: var(--primary-color);
     color: white;
@@ -43,6 +90,8 @@ button:hover, input[type="submit"]:hover {
     box-shadow: var(--box-shadow-hover);
 }
 
+
+/* === Form Input Styles === */
 input[type="text"], input[type="number"] {
     padding: 10px;
     border: 1px solid #555;
@@ -60,6 +109,8 @@ input[type="text"]:focus, input[type="number"]:focus {
     box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
+
+/* === Header Layout === */
 header {
     background-color: var(--dark-background);
     color: white;
@@ -70,6 +121,8 @@ header {
     z-index: 1000;
 }
 
+
+/* === Header Layout === */
 header nav {
     display: flex;
     justify-content: space-between;
@@ -78,16 +131,22 @@ header nav {
     height: 60px;
 }
 
+
+/* === Header Layout === */
 header .nav-left {
     flex-shrink: 0;
     margin-right: 20px; /* Add space between title and buttons */
 }
 
+
+/* === Header Layout === */
 header .nav-left h1 {
     margin: 0;
     font-size: calc(16px + 1.2vw);
 }
 
+
+/* === Header Layout === */
 header .nav-right {
     display: flex;
     list-style-type: none;
@@ -98,12 +157,16 @@ header .nav-right {
     flex-wrap: wrap; /* Allow wrapping if needed */
 }
 
+
+/* === Header Layout === */
 header .nav-right li {
     flex: 1 1 auto; /* Allow items to grow and shrink as needed */
     display: flex;
     justify-content: center;
 }
 
+
+/* === Header Layout === */
 header .nav-right li a {
     display: inline-block;
     background-color: var(--primary-color);
@@ -120,12 +183,16 @@ header .nav-right li a {
     text-align: center;
 }
 
+
+/* === Header Layout === */
 header .nav-right li a:hover {
     background-color: var(--secondary-color);
     box-shadow: var(--box-shadow-hover);
 }
 
 /* Mobile Menu Toggle */
+
+/* === Mobile Toggle === */
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -143,10 +210,14 @@ header .nav-right li a:hover {
     font-size: 24px;
 }
 
+
+/* === Mobile Toggle === */
 .nav-toggle.active span {
     display: none;
 }
 
+
+/* === Mobile Toggle === */
 .nav-toggle::before {
     content: "\2630"; /* Unicode for hamburger icon */
     font-size: 24px;
@@ -155,12 +226,16 @@ header .nav-right li a:hover {
     text-align: center;
 }
 
+
+/* === Mobile Toggle === */
 .nav-toggle.active::before {
     content: "\2715"; /* Unicode for 'X' icon when active */
     font-size: 24px;
 }
 
 /* Mobile Menu */
+
+/* === Mobile Nav Menu === */
 .nav-right {
     transition: max-height 0.3s ease, visibility 0.3s ease;
     overflow: hidden;
@@ -175,17 +250,23 @@ header .nav-right li a:hover {
     max-height: 0; /* Start collapsed */
 }
 
+
+/* === Mobile Nav Menu === */
 .nav-right.active {
     max-height: 300px; /* Expand to show items */
     visibility: visible; /* Make visible */
     padding: 10px 0;
 }
 
+
+/* === Header Layout === */
 header .nav-right li {
     margin: 10px 0;
     text-align: center;
 }
 
+
+/* === Header Layout === */
 header .nav-right li a {
     display: block;
     padding: 15px 20px;
@@ -196,7 +277,11 @@ header .nav-right li a {
 
 
 /* Desktop and Tablet View */
+
+/* === Responsive (Desktop) === */
 @media (min-width: 769px) {
+
+/* === Mobile Nav Menu === */
     .nav-right {
         display: flex; /* Flex on larger screens */
         position: static;
@@ -209,22 +294,32 @@ header .nav-right li a {
         flex-wrap: nowrap; /* Ensure items don't wrap */
     }
 
+
+/* === Mobile Toggle === */
     .nav-toggle {
         display: none; /* Hide toggle button on larger screens */
     }
 }
 
 /* Mobile View */
+
+/* === Responsive (Mobile) === */
 @media (max-width: 768px) {
+
+/* === Mobile Toggle === */
     .nav-toggle {
         display: flex;
     }
 
+
+/* === Mobile Nav Menu === */
     .nav-right.active {
         display: flex;
     }
 }
 
+
+/* === Home Page Layout === */
 .home-container {
     display: flex;
     justify-content: center;
@@ -233,6 +328,8 @@ header .nav-right li a {
     padding: 100px 20px 20px;
 }
 
+
+/* === Home Welcome Box === */
 .home-welcome-box {
     background-color: var(--medium-background);
     border-radius: 10px;
@@ -244,18 +341,24 @@ header .nav-right li a {
     color: #e0e0e0;
 }
 
+
+/* === Home Welcome Box === */
 .home-welcome-box h2 {
     margin-bottom: 20px;
     font-size: 28px;
     color: var(--foreground-color);
 }
 
+
+/* === Home Welcome Box === */
 .home-welcome-box p {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
+
+/* === CTA Buttons === */
 .cta-buttons {
     display: flex;
     justify-content: center;
@@ -279,6 +382,8 @@ header .nav-right li a {
     box-shadow: var(--box-shadow-hover);
 }
 
+
+/* === Resources Page === */
 .resources-container {
     display: flex;
     justify-content: center;
@@ -330,6 +435,8 @@ header .nav-right li a {
     color: var(--secondary-color);
 }
 
+
+/* === Main Layout === */
 .main-container {
     display: flex;
     justify-content: space-between;
@@ -339,6 +446,8 @@ header .nav-right li a {
     gap: 20px;
 }
 
+
+/* === Left & Right Boxes === */
 .left-box, .right-box {
     background-color: var(--dark-background);
     border-radius: 10px;
@@ -351,8 +460,12 @@ header .nav-right li a {
     justify-content: space-between;
 }
 
+
+/* === Session Sections === */
 .saved-players-section,
 .current-session-players-section,
+
+/* === Initiative Rolls Section === */
 .initiative-rolls-section,
 .initiative-order-section {
     background-color: var(--medium-background);
@@ -367,6 +480,8 @@ header .nav-right li a {
     justify-content: space-between;
 }
 
+
+/* === Forms === */
 .add-player-form,
 .session-form,
 #initiativeForm {
@@ -376,28 +491,25 @@ header .nav-right li a {
     margin-bottom: 10px;
 }
 
-.start-round-btn,
-.add-session-btn,
-.remove-session-btn {
-    margin-top: 10px;
-    align-self: flex-end;
-}
 
+/* === Action Buttons === */
+.action-btn {}
+
+
+/* === Initiative Bonuses === */
 .initiative-entry input.bonus {
-    width: 60px;
-    padding: 5px;
-    border-radius: var(--border-radius);
-    border: 1px solid #555;
-    background-color: var(--light-background);
-    color: var(--foreground-color);
-    margin-left: 10px;
+    margin-left: var(--spacing-sm);
 }
 
+
+/* === Initiative Bonuses === */
 .initiative-entry input.bonus:focus {
     border-color: var(--primary-color);
-    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
+
+/* === Player List Styling === */
 .list-box {
     flex: 1;
     background-color: var(--light-background);
@@ -410,6 +522,8 @@ header .nav-right li a {
     max-height: calc(100% - 120px);
 }
 
+
+/* === Player List Styling === */
 .list-box ul,
 #sessionPlayersList,
 #initiativeEntries {
@@ -420,8 +534,12 @@ header .nav-right li a {
     text-align: left;
 }
 
+
+/* === Player List Styling === */
 .list-box ul li,
 #sessionPlayersList li,
+
+/* === Initiative Entry Styling === */
 .initiative-entry label {
     margin-bottom: 6px;
     font-weight: bold;
@@ -435,18 +553,24 @@ header .nav-right li a {
     box-sizing: border-box;
 }
 
+
+/* === Player List Styling === */
 .list-box ul li.selected,
 #sessionPlayersList li.selected {
     background-color: var(--primary-color);
     color: white;
 }
 
+
+/* === Player List Styling === */
 .list-box ul li:hover:not(.selected),
 #sessionPlayersList li:hover:not(.selected) {
     background-color: #555;
     color: var(--primary-color);
 }
 
+
+/* === Initiative Cards === */
 .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -502,6 +626,8 @@ header .nav-right li a {
     opacity: 1;
 }
 
+
+/* === Footer === */
 footer {
     background-color: var(--dark-background);
     color: white;
@@ -511,6 +637,8 @@ footer {
     font-size: 0.9em;
 }
 
+
+/* === About Page === */
 .about-container {
     display: flex;
     justify-content: center;
@@ -541,6 +669,8 @@ footer {
     line-height: 1.6;
 }
 
+
+/* === Initiative Rolls Section === */
 .initiative-rolls-section {
     display: flex;
     flex-direction: column;
@@ -559,6 +689,8 @@ footer {
     list-style-type: none;
 }
 
+
+/* === Initiative Entry Styling === */
 .initiative-entry {
     display: flex;
     justify-content: space-between;
@@ -569,12 +701,16 @@ footer {
     border-radius: var(--border-radius);
 }
 
+
+/* === Initiative Entry Styling === */
 .initiative-entry label {
     margin-right: 10px;
     font-weight: bold;
     color: var(--foreground-color);
 }
 
+
+/* === Initiative Entry Styling === */
 .initiative-entry input[type="number"] {
     width: 60px;
     padding: 5px;
@@ -584,12 +720,18 @@ footer {
     color: var(--foreground-color);
 }
 
+
+/* === Initiative Entry Styling === */
 .initiative-entry input[type="number"]:focus {
     border-color: var(--primary-color);
     box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
+
+/* === Responsive (Desktop) === */
 @media (min-width: 769px) {
+
+/* === Mobile Nav Menu === */
     .nav-right {
         display: flex; /* Flex on larger screens */
         position: static;
@@ -602,12 +744,18 @@ footer {
         flex-wrap: nowrap; /* Ensure items don't wrap */
     }
 
+
+/* === Mobile Toggle === */
     .nav-toggle {
         display: none; /* Hide toggle button on larger screens */
     }
 }
 
+
+/* === Responsive (Mobile) === */
 @media (max-width: 768px) {
+
+/* === Header Layout === */
     header nav {
         flex-direction: column;
         align-items: flex-start;
@@ -621,27 +769,39 @@ footer {
         align-items: center;
     }
 
+
+/* === Mobile Toggle === */
     .nav-toggle {
         display: flex;
     }
 
+
+/* === Mobile Nav Menu === */
     .nav-right.active {
         display: flex;
     }
 
+
+/* === Main Layout === */
     .main-container {
         flex-direction: column;
         padding: 80px 20px 20px;
     }
 
+
+/* === Left & Right Boxes === */
     .left-box, .right-box {
         width: 100%;
     }
 
+
+/* === Home Welcome Box === */
     .home-welcome-box, .resources-box {
         width: 90%;
     }
 
+
+/* === CTA Buttons === */
     .cta-buttons {
         flex-direction: column;
     }
@@ -670,14 +830,20 @@ footer {
 }
 
 @media (max-width: 480px) {
+
+/* === Main Layout === */
     .main-container {
         padding: 60px 10px 10px;
     }
 
+
+/* === Left & Right Boxes === */
     .left-box, .right-box {
         width: 100%;
     }
 
+
+/* === Home Welcome Box === */
     .home-welcome-box, .resources-box {
         width: 100%;
     }
