@@ -148,27 +148,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    if (removeFromSessionBtn) {
-        removeFromSessionBtn.addEventListener("click", function () {
-            const selectedItems = sessionPlayersList.querySelectorAll(".selected");
-            if (selectedItems.length === 0) {
-                alert("No players selected. Please select players to remove.");
-                return;
-            }
-            selectedItems.forEach(item => {
-                const playerName = item.textContent;
-                sessionPlayersList.removeChild(item);
-                const initiativeEntry = Array.from(initiativeEntries.children).find(entry => {
-                    return entry.querySelector("label").textContent === playerName;
-                });
-                if (initiativeEntry) {
-                    initiativeEntries.removeChild(initiativeEntry);
-                }
-            });
-            saveToLocalStorage();
+    // Reset to Defaults Button
+    const resetToDefaultsBtn = document.createElement("button");
+    resetToDefaultsBtn.textContent = "Reset to Defaults";
+    resetToDefaultsBtn.setAttribute("title", "Clear everything and load default players");
+    resetToDefaultsBtn.style.marginTop = "10px";
+    clearSessionBtn.parentElement.appendChild(resetToDefaultsBtn);
+
+    resetToDefaultsBtn.addEventListener("click", function () {
+        if (confirm("Reset everything and load default players?")) {
+            sessionPlayersList.innerHTML = "";
+            initiativeEntries.innerHTML = "";
+            initiativeOrderContainer.innerHTML = "";
+            currentTurnIndex = 0;
+            initiativeGroups = [];
+            localStorage.clear();
+            defaultPlayerNames.forEach(name => addPlayerByName(name));
             updateButtonVisibility();
-        });
-    }
+        }
+    });
 
     if (startRoundBtn) {
         startRoundBtn.addEventListener("click", function (event) {
@@ -257,5 +255,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     updateButtonVisibility();
-    loadFromLocalStorage();
+    const storedPlayers = JSON.parse(localStorage.getItem("players"));
+    if (storedPlayers && storedPlayers.length > 0) {
+        loadFromLocalStorage();
+    } else {
+        defaultPlayerNames.forEach(name => addPlayerByName(name));
+    }
 });
