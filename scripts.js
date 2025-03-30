@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         bonusInput.classList.add("bonus");
         bonusInput.placeholder = "+bonus";
         bonusInput.value = bonus;
-        bonusInput.style.width = "60px";
+        // Removed the fixed inline style so the CSS controls the bonus input sizing
 
         initiativeEntry.appendChild(label);
         initiativeEntry.appendChild(input);

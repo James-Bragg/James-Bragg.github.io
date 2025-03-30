@@ -1,33 +1,17 @@
 :root {
-    /* Updated modern color scheme */
-    --primary-color: #6200ea;  /* Vibrant purple */
-    --secondary-color: #03dac6; /* Teal accent */
+    --primary-color: #9b1010;
+    --secondary-color: #9b1010;
     --background-color: #121212;
     --foreground-color: #ffffff;
     --dark-background: #1f1f1f;
     --medium-background: #2c2c2c;
-    --light-background: #333333;
-    --highlight-background: #444444;
-    
+    --light-background: #333;
+    --highlight-background: #444;
     --font-size-default: 16px;
     --font-size-large: 28px;
-    --border-radius: 8px;
-    
-    --box-shadow-default: 0px 6px 15px rgba(0, 0, 0, 0.25);
-    --box-shadow-hover: 0px 10px 25px rgba(0, 0, 0, 0.35);
-    --transition-speed: 0.3s;
-}
-
-/* Keyframe animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    --border-radius: 5px;
+    --box-shadow-default: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    --box-shadow-hover: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -39,7 +23,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
 button, input[type="submit"] {
@@ -51,14 +34,13 @@ button, input[type="submit"] {
     cursor: pointer;
     font-size: var(--font-size-default);
     box-shadow: var(--box-shadow-default);
-    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap;
 }
 
 button:hover, input[type="submit"]:hover {
     background-color: var(--secondary-color);
     box-shadow: var(--box-shadow-hover);
-    transform: translateY(-2px);
 }
 
 input[type="text"], input[type="number"] {
@@ -67,7 +49,7 @@ input[type="text"], input[type="number"] {
     border-radius: var(--border-radius);
     background-color: var(--medium-background);
     color: var(--foreground-color);
-    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     font-size: var(--font-size-default);
     width: 100%;
     box-sizing: border-box;
@@ -75,7 +57,7 @@ input[type="text"], input[type="number"] {
 
 input[type="text"]:focus, input[type="number"]:focus {
     border-color: var(--primary-color);
-    box-shadow: 0px 0px 5px rgba(3, 218, 198, 0.5);
+    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
 header {
@@ -86,7 +68,6 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    animation: fadeIn 0.5s ease;
 }
 
 header nav {
@@ -133,7 +114,7 @@ header .nav-right li a {
     font-size: var(--font-size-default);
     font-weight: bold;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap;
     width: 100%;
     text-align: center;
@@ -162,23 +143,26 @@ header .nav-right li a:hover {
     font-size: 24px;
 }
 
+.nav-toggle.active span {
+    display: none;
+}
+
 .nav-toggle::before {
     content: "\2630";
     font-size: 24px;
     color: white;
     display: block;
     text-align: center;
-    transition: transform var(--transition-speed) ease;
 }
 
 .nav-toggle.active::before {
     content: "\2715";
-    transform: rotate(180deg);
+    font-size: 24px;
 }
 
 /* Mobile Menu */
 .nav-right {
-    transition: max-height var(--transition-speed) ease, visibility var(--transition-speed) ease;
+    transition: max-height 0.3s ease, visibility 0.3s ease;
     overflow: hidden;
     background-color: var(--dark-background);
     width: 100%;
@@ -238,13 +222,6 @@ header .nav-right li a {
     }
 }
 
-.home-container,
-.resources-container,
-.about-container,
-.main-container {
-    animation: fadeIn 0.5s ease;
-}
-
 .home-container {
     display: flex;
     justify-content: center;
@@ -255,7 +232,7 @@ header .nav-right li a {
 
 .home-welcome-box {
     background-color: var(--medium-background);
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 30px;
     width: 80%;
@@ -266,7 +243,7 @@ header .nav-right li a {
 
 .home-welcome-box h2 {
     margin-bottom: 20px;
-    font-size: var(--font-size-large);
+    font-size: 28px;
     color: var(--foreground-color);
 }
 
@@ -290,8 +267,8 @@ header .nav-right li a {
     text-decoration: none;
     font-size: var(--font-size-default);
     font-weight: bold;
-    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    box-shadow: var(--box-shadow-default);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .cta-button:hover {
@@ -309,7 +286,7 @@ header .nav-right li a {
 
 .resources-box {
     background-color: var(--medium-background);
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 30px;
     width: 80%;
@@ -319,7 +296,7 @@ header .nav-right li a {
 
 .resources-box h2 {
     margin-bottom: 20px;
-    font-size: var(--font-size-large);
+    font-size: 28px;
     color: var(--foreground-color);
 }
 
@@ -343,7 +320,7 @@ header .nav-right li a {
 .resources-box ul li a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color var(--transition-speed) ease;
+    transition: color 0.3s ease;
 }
 
 .resources-box ul li a:hover {
@@ -352,6 +329,7 @@ header .nav-right li a {
 
 .main-container {
     display: flex;
+    flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
     justify-content: space-between;
     align-items: stretch;
     padding: 100px 20px 20px;
@@ -361,7 +339,7 @@ header .nav-right li a {
 
 .left-box, .right-box {
     background-color: var(--dark-background);
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 20px;
     width: 48%;
@@ -377,7 +355,7 @@ header .nav-right li a {
 .initiative-order-section {
     background-color: var(--medium-background);
     padding: 15px;
-    border-radius: calc(var(--border-radius) - 2px);
+    border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     flex: 1;
     margin-bottom: 20px;
@@ -404,7 +382,8 @@ header .nav-right li a {
 }
 
 .initiative-entry input.bonus {
-    width: 60px;
+    width: 100%;      /* Changed to be responsive */
+    max-width: 60px;  /* Ensures it doesn’t become too wide */
     padding: 5px;
     border-radius: var(--border-radius);
     border: 1px solid #555;
@@ -415,13 +394,13 @@ header .nav-right li a {
 
 .initiative-entry input.bonus:focus {
     border-color: var(--primary-color);
-    box-shadow: 0px 0px 5px rgba(3, 218, 198, 0.5);
+    box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
 }
 
 .list-box {
     flex: 1;
     background-color: var(--light-background);
-    border-radius: calc(var(--border-radius) - 2px);
+    border-radius: 8px;
     padding: 10px;
     margin-top: 15px;
     margin-bottom: 20px;
@@ -450,7 +429,7 @@ header .nav-right li a {
     cursor: pointer;
     background-color: var(--highlight-background);
     border-radius: var(--border-radius);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     width: 100%;
     box-sizing: border-box;
 }
@@ -473,7 +452,6 @@ header .nav-right li a {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    perspective: 1000px;
 }
 
 .card {
@@ -486,16 +464,15 @@ header .nav-right li a {
     background-color: #2c3e50;
     color: white;
     margin: 5px;
-    border-radius: var(--border-radius);
+    border-radius: 6px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    transform-style: preserve-3d;
 }
 
 .card:hover {
-    transform: scale(1.05) rotateY(8deg);
+    transform: scale(1.05);
     background-color: #555;
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
 }
 
 .card .player-name {
@@ -514,7 +491,7 @@ header .nav-right li a {
 .card.highlight {
     border: 2px solid var(--primary-color);
     background-color: var(--highlight-background);
-    box-shadow: 0px 0px 10px rgba(3, 218, 198, 0.8);
+    box-shadow: 0px 0px 10px rgba(52, 152, 219, 0.8);
 }
 
 #initiativeOrder {
@@ -543,7 +520,7 @@ footer {
 
 .about-box {
     background-color: var(--medium-background);
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     padding: 30px;
     width: 80%;
@@ -554,63 +531,13 @@ footer {
 
 .about-box h2 {
     margin-bottom: 20px;
-    font-size: var(--font-size-large);
+    font-size: 28px;
     color: var(--foreground-color);
 }
 
 .about-box p {
     font-size: 18px;
     line-height: 1.6;
-}
-
-/* Initiative Roll Section */
-.initiative-rolls-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-    background-color: var(--medium-background);
-}
-
-#initiativeEntries {
-    width: 100%;
-    margin-top: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.initiative-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    margin-bottom: 10px;
-    background-color: var(--highlight-background);
-    border-radius: var(--border-radius);
-}
-
-.initiative-entry label {
-    margin-right: 10px;
-    font-weight: bold;
-    color: var(--foreground-color);
-}
-
-.initiative-entry input[type="number"] {
-    width: 60px;
-    padding: 5px;
-    border-radius: var(--border-radius);
-    border: 1px solid #555;
-    background-color: var(--light-background);
-    color: var(--foreground-color);
-}
-
-.initiative-entry input[type="number"]:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0px 0px 5px rgba(3, 218, 198, 0.5);
 }
 
 /* Responsive adjustments for smaller screens */
