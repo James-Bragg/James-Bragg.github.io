@@ -1,31 +1,26 @@
-/* Global Styles */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* Ensure full-height and sticky footer */
 html, body {
     height: 100%;
     margin: 0;
 }
 
-main {
-    flex: 1;
+body {
+    font-family: Arial, sans-serif;
+    background: #121212;  /* Dark background */
+    color: #e0e0e0;       /* Light text */
+    line-height: 1.6;
     display: flex;
     flex-direction: column;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
+/* Make main expand so footer is pushed to the bottom */
+main {
+    flex: 1;
 }
 
 /* Header & Navigation */
 header {
-    background: #333;
+    background: #1f1f1f;
     color: #fff;
     padding: 1rem 2rem;
 }
@@ -44,7 +39,7 @@ nav {
     background: none;
     border: none;
     cursor: pointer;
-    display: none; /* Hidden on desktop, visible on mobile */
+    display: none; /* Show on mobile if needed */
 }
 
 .nav-toggle span {
@@ -71,7 +66,7 @@ nav {
 }
 
 .nav-right li a:hover {
-    color: #f39c12;
+    color: #bb86fc;
 }
 
 /* Main Containers */
@@ -85,11 +80,11 @@ nav {
 
 /* Home Page */
 .home-welcome-box {
-    background: #fff;
+    background: #1e1e1e;
     padding: 2rem;
     border-radius: 5px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .home-welcome-box h2 {
@@ -108,23 +103,23 @@ nav {
     display: inline-block;
     margin: 0 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: #f39c12;
-    color: #fff;
+    background: #bb86fc;
+    color: #121212;
     text-decoration: none;
     border-radius: 3px;
     transition: background 0.3s ease;
 }
 
 .cta-button:hover {
-    background: #e67e22;
+    background: #9b6dc6;
 }
 
 /* About Page */
 .about-box {
-    background: #fff;
+    background: #1e1e1e;
     padding: 2rem;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .about-box h2 {
@@ -135,15 +130,15 @@ nav {
     margin-bottom: 1rem;
 }
 
-/* Tracker Page */
+/* Tracker Page Sections */
 .session-players-section,
 .initiative-rolls-section,
 .initiative-order-section {
-    background: #fff;
+    background: #1e1e1e;
     padding: 1.5rem;
     border-radius: 5px;
     margin-bottom: 1.5rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .session-players-section h2,
@@ -152,7 +147,7 @@ nav {
     margin-bottom: 1rem;
 }
 
-/* Session Players List */
+/* Session Players List & Forms */
 .add-player-form {
     margin-bottom: 1rem;
 }
@@ -161,22 +156,24 @@ nav {
 .add-player-form input[type="number"] {
     padding: 0.5rem;
     margin-right: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     border-radius: 3px;
+    background: #121212;
+    color: #e0e0e0;
 }
 
 .add-player-form input[type="submit"] {
     padding: 0.5rem 1rem;
     border: none;
-    background: #27ae60;
-    color: #fff;
+    background: #03dac6;
+    color: #121212;
     border-radius: 3px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .add-player-form input[type="submit"]:hover {
-    background: #219150;
+    background: #01bfa5;
 }
 
 .list-box ul {
@@ -185,12 +182,12 @@ nav {
 
 .list-box li {
     padding: 0.5rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #333;
     cursor: pointer;
 }
 
 .list-box li.selected {
-    background: #f1f1f1;
+    background: #333;
 }
 
 /* Initiative Entries */
@@ -208,15 +205,19 @@ nav {
     width: 60px;
     margin-right: 0.5rem;
     padding: 0.3rem;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     border-radius: 3px;
+    background: #121212;
+    color: #e0e0e0;
 }
 
 .initiative-entry input.bonus {
     width: 50px;
     padding: 0.3rem;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     border-radius: 3px;
+    background: #121212;
+    color: #e0e0e0;
 }
 
 /* Initiative Order Cards */
@@ -227,26 +228,26 @@ nav {
 }
 
 .card {
-    background: #f7f7f7;
+    background: #2c2c2c;
     padding: 1rem;
     border-radius: 3px;
     width: 150px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     transition: transform 0.3s ease;
 }
 
 .card.highlight {
     transform: scale(1.05);
-    background: #f1c40f;
+    background: #bb86fc;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 1rem;
-    background: #333;
-    color: #fff;
+    background: #1f1f1f;
+    color: #e0e0e0;
     margin-top: 2rem;
 }
 
