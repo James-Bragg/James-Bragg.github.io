@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <!-- === HEADER / NAVIGATION === -->
     <header>
         <nav>
             <div class="nav-left">
@@ -32,12 +33,13 @@
             </ul>
         </nav>
     </header>
+    <!-- === MAIN CONTENT === -->
     <main class="main-container">
         <section class="left-box session-players-section" aria-labelledby="session-players-heading">
             <h2 id="session-players-heading">Session Players</h2>
             <form id="addPlayerForm" class="add-player-form" aria-label="Add New Player Form">
                 <input type="text" name="name" placeholder="Enter player name" aria-label="Player Name" title="Enter the name of the player to add them to the session">
-                <input type="number" name="bonus" placeholder="+bonus" title="Optional initiative bonus" style="width: 80px;">
+                <input type="number" name="bonus" placeholder="+bonus" title="Optional initiative bonus" class="input-compact"">
                 <input type="submit" value="Add Player" title="Click to add the player to the session">
             </form>
             <div class="list-box">
@@ -57,7 +59,7 @@
                 <ul id="initiativeEntries" aria-live="polite">
                     <!-- Initiative entries will be handled by JavaScript -->
                 </ul>
-                <button type="submit" class="start-round-btn" aria-label="Start Round">Start Round</button>
+                <button type="submit" class="action-btn" aria-label="Start Round">Start Round</button>
             </form>
         </section>
 
@@ -73,6 +75,7 @@
         </section>
     </main>
 
+    <!-- === FOOTER === -->
     <footer>
         <p>&copy; 2024 D&D Tool Assister. All rights reserved.</p>
     </footer>
