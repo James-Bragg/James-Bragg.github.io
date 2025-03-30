@@ -70,12 +70,9 @@ nav {
     color: #bb86fc;
 }
 
-/* Nav Toggle Button Styling */
 .nav-toggle {
-    background: #333;
-    border: 1px solid #555;
-    border-radius: 3px;
-    padding: 0.2rem;
+    background: none;
+    border: none;
     cursor: pointer;
     display: none; /* Hidden on desktop, enabled in mobile view */
 }
@@ -85,11 +82,7 @@ nav {
     width: 25px;
     height: 3px;
     background: #fff;
-    margin: 4px 0;
-}
-
-.nav-toggle:hover {
-    background: #444;
+    margin: 4px 0;  /* Reduced margin */
 }
 
 .nav-right {
@@ -135,7 +128,7 @@ nav {
          transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
     }
     .nav-right.active {
-         max-height: 300px; /* Enough space for three lines */
+         max-height: 300px; /* Enough space for 3 lines */
          opacity: 1;
     }
     .nav-right li {
@@ -154,10 +147,11 @@ nav {
     }
 }
 
-/* Main content flows naturally below the sticky header */
+/* Main content now flows naturally below the sticky header */
 main {
     flex: 1;
-    margin-top: 0; /* No extra top margin needed since header is in normal flow */
+    /* Remove the large margin-top since header is in normal flow */
+    margin-top: 0;
 }
 
 /* Main Containers for Home, About, and Tracker pages */
@@ -314,16 +308,6 @@ main {
     width: 80px;
 }
 
-/* Initiative Rolls Form: Position roll controls at bottom */
-#initiativeForm {
-    display: flex;
-    flex-direction: column;
-    min-height: 300px; /* Adjust height as needed */
-}
-.roll-controls {
-    margin-top: auto;
-}
-
 /* Initiative Order Cards */
 .card-container {
     display: flex;
@@ -331,13 +315,12 @@ main {
     gap: 1rem;
 }
 
-/* Cards are taller than they are wide */
+/* Add 3D interactive hover effect to cards */
 .card {
     background: #2c2c2c;
     padding: 1rem;
     border-radius: 3px;
     width: 150px;
-    height: 220px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
