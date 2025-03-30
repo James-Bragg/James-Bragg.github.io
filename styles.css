@@ -70,11 +70,19 @@ nav {
     color: #bb86fc;
 }
 
+/* Style the nav toggle button to look like a dropdown button */
 .nav-toggle {
-    background: none;
-    border: none;
+    background: #03dac6;
+    border: 1px solid #03dac6;
+    border-radius: 3px;
+    padding: 0.3rem 0.5rem;
     cursor: pointer;
     display: none; /* Hidden on desktop, enabled in mobile view */
+    transition: background 0.3s ease;
+}
+
+.nav-toggle:hover {
+    background: #01bfa5;
 }
 
 .nav-toggle span {
@@ -82,7 +90,7 @@ nav {
     width: 25px;
     height: 3px;
     background: #fff;
-    margin: 4px 0;  /* Reduced margin */
+    margin: 3px 0;
 }
 
 .nav-right {
@@ -147,10 +155,9 @@ nav {
     }
 }
 
-/* Main content now flows naturally below the sticky header */
+/* Main content flows naturally below the sticky header */
 main {
     flex: 1;
-    /* Remove the large margin-top since header is in normal flow */
     margin-top: 0;
 }
 
@@ -315,12 +322,17 @@ main {
     gap: 1rem;
 }
 
-/* Add 3D interactive hover effect to cards */
+/* Adjust cards to be taller than wide and center their content */
 .card {
     background: #2c2c2c;
     padding: 1rem;
     border-radius: 3px;
-    width: 150px;
+    width: 120px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
