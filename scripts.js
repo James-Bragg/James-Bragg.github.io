@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearSessionBtn = document.getElementById("clearSessionBtn");
     const removeFromSessionBtn = document.getElementById("removeFromSessionBtn");
     const initiativeEntries = document.getElementById("initiativeEntries");
-    const startRoundBtn = document.querySelector(".start-round-btn");
+    // Removed the old "start-round-btn" selector and replaced it with direct button IDs below.
     const initiativeOrderContainer = document.getElementById("initiativeOrder");
     const prevTurnBtn = document.getElementById("prevTurnBtn");
     const nextTurnBtn = document.getElementById("nextTurnBtn");
@@ -99,14 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
         bonusInput.classList.add("bonus");
         bonusInput.placeholder = "+bonus";
         bonusInput.value = bonus;
-        // Removed the fixed inline style so the CSS controls the bonus input sizing
 
         initiativeEntry.appendChild(label);
         initiativeEntry.appendChild(input);
         initiativeEntry.appendChild(bonusInput);
         initiativeEntries.appendChild(initiativeEntry);
 
-        // Save when bonus changes (could be debounced if necessary)
+        // Save when bonus changes
         bonusInput.addEventListener("input", () => {
             saveToLocalStorage();
         });
@@ -129,10 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update the visibility of action buttons based on the current state
     function updateButtonVisibility() {
+        // If there are no initiative entries, hide the roll button.
+        // (Assuming the roll button is separate, since we now use IDs for buttons.)
+        const rollInitiativeBtn = document.getElementById("rollInitiativeBtn");
         if (initiativeEntries.querySelectorAll(".initiative-entry").length === 0) {
-            startRoundBtn.style.display = "none";
+            if (rollInitiativeBtn) rollInitiativeBtn.style.display = "none";
         } else {
-            startRoundBtn.style.display = "inline-block";
+            if (rollInitiativeBtn) rollInitiativeBtn.style.display = "inline-block";
         }
 
         if (initiativeGroups.length > 1) {
@@ -231,8 +233,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if (startRoundBtn) {
-        startRoundBtn.addEventListener("click", event => {
+    // ROLL INITIATIVE BUTTON
+    const rollInitiativeBtn = document.getElementById("rollInitiativeBtn");
+    if (rollInitiativeBtn) {
+        rollInitiativeBtn.addEventListener("click", event => {
             event.preventDefault();
 
             const initiativeList = [];
@@ -296,6 +300,17 @@ document.addEventListener("DOMContentLoaded", () => {
             currentTurnIndex = 0;
             updateCurrentTurn();
             updateButtonVisibility();
+        });
+    }
+
+    // CLEAR INITIATIVE BUTTON
+    const clearInitiativeBtn = document.getElementById("clearInitiativeBtn");
+    if (clearInitiativeBtn) {
+        clearInitiativeBtn.addEventListener("click", () => {
+            initiativeEntries.innerHTML = "";
+            initiativeOrderContainer.innerHTML = "";
+            currentTurnIndex = 0;
+            initiativeGroups = [];
         });
     }
 

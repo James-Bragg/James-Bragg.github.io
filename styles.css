@@ -17,7 +17,7 @@ body {
 header {
     background: #1f1f1f;
     color: #fff;
-    padding: 0.5rem 2rem; /* Reduced padding for a smaller header */
+    padding: 0.25rem 1rem; /* Reduced padding for a smaller header */
     position: fixed;
     top: 0;
     left: 0;
@@ -28,7 +28,7 @@ header {
 /* Ensure main content doesn't get hidden behind the fixed header */
 main {
     flex: 1;
-    margin-top: 60px;  /* Adjust this value if your header height changes */
+    margin-top: 40px;  /* Adjusted top margin to match the smaller header */
 }
 
 /* Header & Navigation */
@@ -39,7 +39,7 @@ nav {
 }
 
 .nav-left h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;  /* Smaller font size for a more compact header */
 }
 
 .nav-toggle {
