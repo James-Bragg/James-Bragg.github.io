@@ -423,6 +423,16 @@ header .nav-right li a {
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* New Rule: Ensure list items in Initiative Rolls display sections in one row */
+.initiative-rolls-section .list-box ul li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 6px;
+}
+
 .add-player-form,
 .session-form,
 #initiativeForm {
