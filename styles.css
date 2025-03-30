@@ -13,7 +13,7 @@ body {
     flex-direction: column;
 }
 
-/* Make main expand so footer is pushed to the bottom */
+/* Main content expands so footer is pushed to the bottom */
 main {
     flex: 1;
 }
@@ -39,7 +39,7 @@ nav {
     background: none;
     border: none;
     cursor: pointer;
-    display: none; /* Show on mobile if needed */
+    display: none; /* Hidden on desktop, visible on mobile */
 }
 
 .nav-toggle span {
@@ -69,7 +69,39 @@ nav {
     color: #bb86fc;
 }
 
-/* Main Containers */
+/* Dropdown menu styling for small screens */
+@media (max-width: 768px) {
+    .nav-right {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background: #1f1f1f;
+        border-top: 1px solid #333;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+    }
+    .nav-right.active {
+        display: flex;
+    }
+    .nav-right li {
+        margin: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+    .nav-right li a {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+    .nav-right li a:hover {
+        background: #333;
+    }
+}
+
+/* Main Containers for Home, About, and Tracker pages */
 .home-container,
 .about-container,
 .main-container {
@@ -145,6 +177,17 @@ nav {
 .initiative-rolls-section h2,
 .initiative-order-section h2 {
     margin-bottom: 1rem;
+}
+
+/* Tracker Page Layout: Three Columns */
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.main-container > section {
+    flex: 1 1 calc(33.33% - 1rem);
 }
 
 /* Session Players List & Forms */
@@ -242,6 +285,28 @@ nav {
     background: #bb86fc;
 }
 
+/* Button Styling for Tracker Sections */
+.session-controls button,
+.roll-controls button,
+.navigation button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #03dac6;
+    color: #121212;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.session-controls button:hover,
+.roll-controls button:hover,
+.navigation button:hover {
+    background: #01bfa5;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -249,38 +314,4 @@ footer {
     background: #1f1f1f;
     color: #e0e0e0;
     margin-top: 2rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-
-    .nav-toggle {
-        display: block;
-    }
-
-    .nav-right {
-        flex-direction: column;
-        width: 100%;
-        display: none;
-    }
-
-    .nav-right.active {
-        display: flex;
-    }
-
-    .nav-right li {
-        margin: 0.5rem 0;
-    }
-
-    .cta-buttons {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .cta-button {
-        margin: 0.5rem 0;
-    }
 }
