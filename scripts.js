@@ -20,7 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentTurnIndex = 0;
     let initiativeGroups = [];
 
-    const defaultPlayerNames = ["Enemy", "Friend", "Emma", "Damian", "Dom", "Ryan", "David", "World", "James"];
+    const defaultPlayerData = [
+        { name: "Enemy", bonus: 0 },
+        { name: "Friend", bonus: 0 },
+        { name: "Emma", bonus: 0 },
+        { name: "Damian", bonus: 0 },
+        { name: "Dom", bonus: 0 },
+        { name: "Ryan", bonus: 0 },
+        { name: "David", bonus: 0 },
+        { name: "World", bonus: 0 },
+        { name: "James", bonus: 0 }
+    ];
 
     function saveToLocalStorage() {
         const players = Array.from(sessionPlayersList.querySelectorAll("li")).map(li => li.textContent);
@@ -79,9 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
         initiativeEntry.appendChild(input);
         initiativeEntry.appendChild(bonusInput);
         initiativeEntries.appendChild(initiativeEntry);
-
+        // Save when bonus changes
+        bonusInput.addEventListener("input", () => {
         saveToLocalStorage();
-    }
+    })};
 
     function updateCurrentTurn() {
         const cards = initiativeOrderContainer.querySelectorAll(".card");
@@ -117,6 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
             const playerNameInput = addPlayerForm.querySelector('input[name="name"]');
             const playerName = playerNameInput.value.trim();
+            const bonusInput = addPlayerForm.querySelector('input[name="bonus"]');
+            const bonus = bonusInput.value.trim();
 
             if (!playerName) {
                 alert("Player name cannot be empty. Please enter a valid name.");
@@ -128,8 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            addPlayerByName(playerName);
+            addPlayerByName(playerName, bonus);
             playerNameInput.value = "";
+            bonusInput.value = "";
             updateButtonVisibility();
         });
     }
@@ -254,11 +268,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    updateButtonVisibility();
     const storedPlayers = JSON.parse(localStorage.getItem("players"));
     if (storedPlayers && storedPlayers.length > 0) {
         loadFromLocalStorage();
     } else {
         defaultPlayerData.forEach(player => addPlayerByName(player.name, player.bonus));
     }
+    updateButtonVisibility();
 });
